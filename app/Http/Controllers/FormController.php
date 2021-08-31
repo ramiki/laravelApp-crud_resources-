@@ -13,7 +13,7 @@ class FormController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     
+
     public function index()
     {
         $forms = form::latest()->paginate(5);
@@ -91,6 +91,7 @@ class FormController extends Controller
             'note' => 'required'
         ]);
         $form->update($request->all());
+        $form->create($request->all());
 
         return redirect()->route('forms.index')
             ->with('success', 'data updated successfully');
@@ -104,7 +105,7 @@ class FormController extends Controller
      */
     public function destroy(Form $form)
     {
-        $form->delete();
+        $form->truncate();
 
         return redirect()->route('forms.index')
             ->with('success', 'form deleted successfully');

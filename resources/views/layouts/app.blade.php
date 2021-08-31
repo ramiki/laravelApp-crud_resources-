@@ -34,7 +34,7 @@
     @show
 
     <div class="container">
-        CRUD('content')
+        @yield('content')
     </div>
     <div class="text-center footer">
 
