@@ -91,7 +91,7 @@ class FormController extends Controller
             'note' => 'required'
         ]);
         $form->update($request->all());
-        $form->create($request->all());
+        // $form->create($request->all());
 
         return redirect()->route('forms.index')
             ->with('success', 'data updated successfully');
@@ -105,7 +105,7 @@ class FormController extends Controller
      */
     public function destroy(Form $form)
     {
-        $form->truncate();
+        $form->delete();
 
         return redirect()->route('forms.index')
             ->with('success', 'form deleted successfully');

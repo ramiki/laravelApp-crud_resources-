@@ -19,8 +19,8 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            background-color: #9C27B0;
-            color: white;
+            background-color: #f5ff97;
+            color: rgb(12, 12, 12);
             text-align: center;
         }
 
@@ -29,6 +29,7 @@
 </head>
 
 <body>
+
     @section('sidebar')
 
     @show
@@ -36,13 +37,12 @@
     <div class="container">
         @yield('content')
     </div>
+
     <div class="text-center footer">
-
-        <h4>The writer needs a job</h4>
-        <h4>ramiki</h4>
-        <h4>form crud</h4>
-
+     <h4>Form Crud</h4>
     </div>
+
 </body>
+
 
 </html>
