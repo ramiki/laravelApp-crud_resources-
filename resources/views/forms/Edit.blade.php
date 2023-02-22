@@ -24,27 +24,37 @@
     @endif
 
     <form action="{{ route('forms.update', $form->id) }}" method="POST">
+
+        {{--  add a key in this post , the key generrated by private key of this laravel app (look at .env )  --}}
         @csrf
+
+        {{-- add hint  --}}
         @method('PUT')
 
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" value="{{ $form->name }}" class="form-control" placeholder="Name">
+                    <input type="name" name="name" value="{{ $form->name }}" class="form-control" placeholder="Name">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>email:</strong>
-                    <textarea class="form-control" style="height:50px" name="email"
-                        placeholder="email">{{ $form->email }}</textarea>
-                </div>
+                    <strong>nb:</strong>
+                    <textarea class="form-control" style="height:50px" name="nb"
+                        placeholder="email">{{ $form->nb }}</textarea>
+                </div> 
+                </div>--}}
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>email:</strong>
+                        <input type="email" name="email" value="{{ $form->email }}" class="form-control" placeholder="email">
+                    </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>age:</strong>
-                    <input type="text" name="age" class="form-control" placeholder="{{ $form->age }}"
+                    <input type="number" name="age" class="form-control" placeholder="{{ $form->age }}"
                         value="{{ $form->age }}">
                 </div>
             </div>
