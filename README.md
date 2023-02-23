@@ -108,7 +108,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 			    npm install
 			    npm run dev
 
-            usage :  work directly after install : ref https://laravelarticle.com/laravel-8-authentication-tutorial
+            usage :  work directly after install . for more : ref https://laravelarticle.com/laravel-8-authentication-tutorial
 
 - faker : laravel come with faker package
  

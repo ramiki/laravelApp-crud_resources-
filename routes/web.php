@@ -39,7 +39,7 @@ Route::post('form', [testFormController::class, 'form_p_test']);
 // form route with crud name ( form.index - form.show .....)
 // Route::resource() is a helper method that generates individual routes
 // see Naming Resource Routes in laravel doc to rename the resources default names 
-Route::resource('forms', FormController::class)
+Route::resource('forms', FormController::class)->middleware('auth')
     // change param name of resouces : 
     // ->parameters(['forms' => 'something'])
 
@@ -47,3 +47,10 @@ Route::resource('forms', FormController::class)
     ->missing(function (Request $request) {
         return Redirect::route('forms.index');
     });
+
+
+// routes added by ui auth
+// by adding ->middleware('auth') to end of routes like above we protect it with the euth
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

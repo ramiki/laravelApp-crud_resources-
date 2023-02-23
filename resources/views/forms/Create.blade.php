@@ -1,7 +1,7 @@
 {{-- for more info about blade Templates : check the doc or the two pic in views/layouts folder : --}}
 
 {{-- call the layouts/app.blade.php and put it in this page  --}}
-@extends('layouts.app')
+@extends('layouts.app2')
 
 {{-- put this content in @yield('content') of extended layouts/app.blade.php above --}}
 @section('content')
