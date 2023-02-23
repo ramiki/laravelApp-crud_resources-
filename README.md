@@ -67,7 +67,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 
-## laravel crud tester :  version 8.. 
+## laravel tester :  version 8.. 
 
 # pre-config :
 
