@@ -24,7 +24,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//  route url get parametred (jus test)
+//  route url get parametred (jus test )
 /* route::get('test/{n}', function ($n)  {
     echo   " hello " . $n ;   
 })->where ('n' , '[a-z]+');  // constrain the format of your route parameters using the where()
