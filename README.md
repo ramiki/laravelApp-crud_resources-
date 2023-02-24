@@ -99,7 +99,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # add aditionale pckages (with composer) :
 
-- auth by ui package : not used yet in this project !
+- auth by ui auth package :
                        
             install :
 			    composer require laravel/ui
