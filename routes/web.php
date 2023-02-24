@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\testFormController;
 
+use App\Http\Controllers\ConsumControlle;
+
 // Customizing Missing Model Behavior:
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -54,3 +56,6 @@ Route::resource('forms', FormController::class)->middleware('auth')
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('cons', [ConsumControlle::class, 'get']);
+Route::get('post', [ConsumControlle::class, 'creat']);
