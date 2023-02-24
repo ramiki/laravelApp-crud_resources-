@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<!-- <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 <p align="center">
 <a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
@@ -62,4 +62,112 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
+
+
+
+
+## laravel tester :  version 8.. 
+
+# pre-config :
+
+- Laravel Installation : composer create-project --prefer-dist laravel/laravel crud
+- cp : .env.example to .env  
+
+- composer install : to un all packages find in composer.jon
+
+- Database Configuration : .env file  ( dont forget to  creat same db )
+- php artisan key:generate : to generate laravel unique app key 
+
+- Migration create :   php artisan make:migration create_forms_table --create=forms
+- Migration Configuration :\database\migrations\2021_08_30_185321_create__table.php
+- Migration run all : php artisan migrate
+
+- routes adding : routes\web.php ( + resource method )
+
+- create views , i creat it manually ( view/forms : creat / edit / index / show , for resource methode ) and template ( view/layouts/app.blade.php )
+    for more details about blade engine  : https://laravel.com/docs/7.x/blade
+
+- creat controller and his model with resource methode : php artisan make:controller FormController --model=Form --resource 
+    ( app\Http\Controllers\FormController.php with esource & app\Models\Form.php ) 
+
+- creat resources !
+
+- add pagination : exemple in app\Http\Controllers\FormController.php , in index() methode
+
+ add lignes to : app\Providers\AppServiceProvider.php , for style pagination view with bootstrapapp 
+
+# add aditionale pckages (with composer) :
+
+- auth by ui auth package :
+                       
+            install :
+			    composer require laravel/ui
+			    php artisan ui bootstrap --auth   // can use startap templat of bootstrap - vue or react
+                // ref :https://medium.com/@agavitalis/php-artisan-make-auth-command-is-not-defined-laravel-6-b51adcc6356d
+			    npm install
+			    npm run dev
+
+            usage :  work directly after install . for more : ref https://laravelarticle.com/laravel-8-authentication-tutorial
+
+- faker : laravel come with faker package
+ 
+            install : if not installed or to install it in a simple php projet : 
+                composer require fakerphp/faker
+                ref doc : https://fakerphp.github.io/ 
+        
+            usage : 
+                ceate facory of model specified  : php artisan make:factory FormFactory --model=Form         
+                fake tada generator config : Database\Factories\FormFactory.php 
+                migration to run ( seeder config ) : database\seeders\DatabaseSeeder.php
+                running all seeder cmd :  php artisan db:seed
+
+
+ 
+         ---------------------------------------------------------------------------------------
+
+# php atisan  make :
+
+
+  **  make:cast             // converting attributes (retrived data from model) to common data types (string o int ...).
+                            // the same of 'Accessors & Mutators' for data converting
+      make:channel
+      make:command
+      make:component
+  **  make:controller      // make a controller
+      make:event
+      make:exception
+  **  make:factory         // generate data (faker)
+      make:job
+      make:listener
+      make:mail
+  **  make:middleware      // make a middleware 
+  **  make:migration       // make migration
+  **  make:model           // make model
+      make:notification
+      make:observer
+      make:policy
+      make:provider
+      make:request
+  **  make:resource        // make resource
+      make:rule
+  **  make:seeder          // stor the generaited data (by ex factory) in db 
+      make:test
+
+
+# php artisan :  
+
+      route:list    // to get route listes
+      key:generate  // to generate laravel unique app key 
+      migrate       // lancer la migration
+      ui:auth       // install ui auth package with out template view
+      make:         // make a : migration  |  controller ... ( look at make: above )
+      db:seed       // running all seeder
+      app:name      // Creating user defined namespace ( change the namespace to match with web application )
+      -V            // laravel Version    ( also : composer -V , php -v )
+
+
+
+# notes  : 
+
+    

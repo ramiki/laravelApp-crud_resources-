@@ -17,8 +17,8 @@ class CreateFormsTable extends Migration
             $table->id();
             $table->string('name',255)->nullable();
             $table->string('email',255)->nullable();
-            $table->string('age',255)->nullable();
-            $table->string('note',255)->nullable();
+            $table->int('age',255)->nullable();
+            $table->int('note',255)->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->nullable();
         });

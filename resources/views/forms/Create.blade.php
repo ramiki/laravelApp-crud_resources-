@@ -1,6 +1,11 @@
-@extends('layouts.app')
+{{-- for more info about blade Templates : check the doc or the two pic in views/layouts folder : --}}
 
+{{-- call the layouts/app.blade.php and put it in this page  --}}
+@extends('layouts.app2')
+
+{{-- put this content in @yield('content') of extended layouts/app.blade.php above --}}
 @section('content')
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
@@ -11,7 +16,6 @@
             </div>
         </div>
     </div>
-
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -29,20 +33,26 @@
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" placeholder="Name">
+                    <input type="name" name="name" class="form-control" placeholder="Name">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>email:</strong>
-                    <textarea class="form-control" style="height:50px" name="email"
-                        placeholder="email"></textarea>
-                </div>
+                    <strong>nb:</strong>
+                    <textarea class="form-control" style="height:50px" name="nb"
+                        placeholder="nb"> ## ... </textarea>
+                </div> 
+                </div>--}}
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>email:</strong>
+                        <input type="email" name="email" class="form-control" placeholder="email">
+                    </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>age:</strong>
-                    <input type="text" name="age" class="form-control" placeholder="age">
+                    <input type="number" name="age" class="form-control" placeholder="age">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
@@ -55,6 +65,5 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
-
     </form>
 @endsection
