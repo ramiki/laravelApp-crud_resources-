@@ -80,7 +80,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // change 'en' to 'fr' ex of resources/lang/fr , for test validation (fr files find in the net)
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------

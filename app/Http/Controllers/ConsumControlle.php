@@ -14,7 +14,7 @@ class ConsumControlle extends Controller
 
     // laravel methode : facade http and guzzle option
 
-    $response =  Http::get('http://127.0.0.1/my/laravelApp-crud_resources-/public/api/forms/12');
+    $response =  Http::get('http://127.0.0.1/my/laravelApp-crud_resources-/public/api/forms/21');
     $jsonData = $response->json();
     return $jsonData;
 
@@ -36,7 +36,6 @@ class ConsumControlle extends Controller
   }
 
 
-
   public function creat()
   {
 
@@ -52,7 +51,6 @@ class ConsumControlle extends Controller
   return  json_decode($response);
 
 // or 
-
 
 // $data = [
 //   'name' => 'John Doe',
@@ -74,14 +72,11 @@ class ConsumControlle extends Controller
 
   }
 
-
-
 }
 
 
 
       // *************  out of box ex ****************
-
 
 
 // get all
@@ -101,10 +96,8 @@ class ConsumControlle extends Controller
 // return $response;
 
 
+          //**************************************************** */   
 
-          //**************************************************** */
-
-   
 
 // get one by id , one concept for : add / update /delete .....
 
@@ -120,12 +113,12 @@ class ConsumControlle extends Controller
 //   CURLOPT_FOLLOWLOCATION => true,
 //   CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 //   CURLOPT_CUSTOMREQUEST => 'GET',
-//   CURLOPT_POSTFIELDS =>'{
-//   "name": "uuupppppppuuuu",
-//   "email": "fdgfdgfd",
-//   "age": "fdgfdgfd",
-//   "note": "fdgfdgfd"
-// }',
+// //  CURLOPT_POSTFIELDS =>'{
+// //  "name": "uuupppppppuuuu",
+// //  "email": "fdgfdgfd",
+// //  "age": "fdgfdgfd",
+// // "note": "fdgfdgfd"
+// //}',
 //   CURLOPT_HTTPHEADER => array(
 //     'Content-Type: application/json',
 //     'Cache-Control: no-cache',

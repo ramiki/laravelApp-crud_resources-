@@ -89,7 +89,6 @@ class ApiController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\Form  $form
-     * @param : test get users y name : changed to default sending from view , catched by route  "$for"
      * 
      * @return \Illuminate\Http\Response
      */

@@ -22,6 +22,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 use App\Http\Controllers\ApiController;
 Route::resource('forms', ApiController::class);
 
-
-
-

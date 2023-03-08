@@ -2,13 +2,20 @@
 
 namespace App\Models;
 
+// to use factory
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
+// To enable soft deletes for a model, we add this trait 
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Form extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
+    // aditionale name of table in case changed ! 
     protected $table = 'forms';
     public $timestamps = true;
 
@@ -25,9 +32,16 @@ class Form extends Model
         'email',
         'created_at',
         'age',
-        'note'
+        'note',
+        'user_id',
+        'image'
     ];
 
+    // in the new version >5.. The SoftDeletes trait will automatically cast the deleted_at 
+    // attribute to a DateTime / Carbon instance for you , no need to add ligne bellow
+    // protected $dates = ['deleted_at'];
+
+    // change the param routes id to name (ex : get users by name "also in url") 
     // public function getRouteKeyName()
     // {
     //     // generate url param by name ( ex in form.show )
@@ -39,5 +53,14 @@ class Form extends Model
     // {
     //     return str_replace(' ', '_', $this->getAttribute($this->getRouteKeyName()));
     // }
+
+    // belongsto relationship ( retrive user name from user model and show it in index view)
+    public function user(){
+
+        return $this->belongsTo(User::class);
+
+    }
+
+
 
 }

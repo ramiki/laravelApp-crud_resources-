@@ -21,8 +21,6 @@
             left: 0;
             bottom: 0;
             width: 100%;
-            background-color: #0084ff79;
-            color: rgb(0, 0, 0);
             text-align: center; 
         }
 
@@ -34,11 +32,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    {{-- bootswatche theme  --}}
+    {{-- <link href="{{ asset('css/theme2.css') }}" rel="stylesheet">   --}}
+
 
 </head>
 
 <body>
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-4">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -108,9 +109,9 @@
     </body>
     
 
-    <div class="footer">
+    <div class="footer bg-primary text-white">
         <br>
-            <h4>Form Crud </h4>
+            <h4>---- School Management ----- </h4>
         <br>    
 
 

@@ -25,6 +25,21 @@
                             </div>
                         </div>
 
+                        {{-- login by name ( dont forget to change the retun of methode username to name in : \vendor\laravel\ui\auth-backend\AuthenticatesUsers.php --}}
+                        {{-- <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('name') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
                         <div class="row mb-3">
                             <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
 

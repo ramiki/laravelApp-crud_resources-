@@ -33,12 +33,12 @@ Route::get('/', function () {
 // Route::get('contact', [testFormController::class, 'contact_us']);
 
 
-//parametred route to pass it to controller or view  //  named route to call it in views when needed
+//parametred route to pass it to controller or view  // ->name() named route to call it in views when needed
 Route::get('form/{test}', [testFormController::class, 'form_test'])->name('form.bar');
 Route::post('form', [testFormController::class, 'form_p_test']);
 
 
-// form route with crud name ( form.index - form.show .....)
+// forms route with crud name ( form.index - form.show .....)
 // Route::resource() is a helper method that generates individual routes
 // see Naming Resource Routes in laravel doc to rename the resources default names 
 Route::resource('forms', FormController::class)->middleware('auth')
@@ -57,5 +57,6 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// api conssomation routes
 Route::get('cons', [ConsumControlle::class, 'get']);
 Route::get('post', [ConsumControlle::class, 'creat']);
