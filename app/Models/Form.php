@@ -17,9 +17,10 @@ class Form extends Model
 
     // aditionale name of table in case changed ! 
     protected $table = 'forms';
+
     public $timestamps = true;
 
-    // change the data type after retriving data from db
+    // cast : change the data type after retriving data from db
     protected $casts = [
         'age' => 'int' ,
         'note' => 'int'
@@ -27,6 +28,7 @@ class Form extends Model
 
     // adding $fillable property to model work as when creating or updating an instance of the "forms" model, the data can be passed in as an array, 
     // and Laravel will automatically assign the values to the corresponding fields in the model. This is done using the "create" method (look at FormController at store() method )
+    // Mass assignment
     protected $fillable = [
         'name',
         'email',
@@ -61,6 +63,18 @@ class Form extends Model
 
     }
 
+    // accessor
+    public function getNameAttribute($value)
+    {
+        // return strtoupper($value) ;
+    // or
+        return 'Mr . ' . $value;
+    }
 
+    // // mutator
+    // public function setNameAttribute($value)
+    // {
+    //     return  $this->attributes['name'] = strtoupper($value) ;
+    // }
 
 }

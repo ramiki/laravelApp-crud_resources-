@@ -139,21 +139,23 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
       make:cast             // ** converting attributes (retrived data from model) to common data types (string o int ...).
-                            // the same of 'Accessors & Mutators' for data converting
+                                     the same of 'Accessors & Mutators' for data converting
       make:channel
       make:command
-      make:component
+      make:component       //
       make:controller      // ** make a controller
       make:event
       make:exception
       make:factory         // ** generate data (faker)
       make:job
       make:listener
-      make:mail
-      make:middleware      // ** make a middleware 
-      make:migration       // ** make migration
+      make:mail            // ** create a "Email" file in app/mail/testmail.php for mail class "build" to define view and subject ...
+                                    Markdown mailable messages allow you to take advantage of the pre-built templates and components ( blade ) of mail notifications in your mailables
+                                    sender location : app/mail/contactMail.php     &  template location : view/mails/contat.blade.php
+      make:middleware      // ** make a middleware ( access control ) mechanism for filtering HTTP requests entering your application
+      make:migration       // ** make migration ( creat table , column ...)
       make:model           // ** make model
-      make:notification
+      make:notification    // ** 
       make:observer
       make:policy          // ** make a policy and gates "Gate is the same as Permission" ( classes that organize authorization logic around a particular model or resource )
       make:provider
@@ -180,10 +182,44 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       storage:link  // link the storage dir to public ( to access uploaded file ) look at : config/filesystem.php
 
 
-# notes  : 
+# notes  :  ( DRY : Dont Repeat Yourself )
+    
+- **** for more infos see the doc ***
 
-   - change validation lunguage : (see /config/app.php)
+    - Blade Rendering Components : to display a component, you may use a Blade component tag within one of your Blade templates. Blade component tags start with
+        the string x- followed by the kebab case name of the component class:   <x-alert/>  <x-user-profile/>
 
-   - errors view : we add a folder with "errors" name and a file with the number of errors "403.blade.php    (see /view/errors) 
+    - To obtain an instance of the current HTTP request via dependency injection, you should type-hint the Illuminate\Http\Request class on your route closure or controller method.
+        The incoming request instance will automatically be injected by the Laravel service container :   public function store(Request $request)  { ... }
+    
+    - Change validation lunguage : (see /config/app.php)
+    
+    - Errors view : we add a folder with "errors" name and a file with the number of errors "403.blade.php    (see /view/errors) 
+    
+    - Edit /config/database.php file, search for mysql entry and change:
+        'engine' => null,    to  'engine' => 'InnoDB',
+         This saves you from adding $table->engine = "InnoDB"; for each of your Schemas ;)
 
-   - 
+    - In relationship we can change $users = User::all(); to $users = User::with('comments')->get();  to performe queries ( specified relationned table ('comment') before the call)
+       ( instead of repeat queries it can resume it ) see ref : with() of models 
+
+    - Polymorphism poo : many forms = methodes overriding and overloading   
+
+    - Polymorphism laravel relationships : a way of models relationships , one table associate to many other tables  ( comments table is associated to posts table and videos table ... )
+        a ref ( https://www.youtube.com/watch?v=KWLeV0VOwdc&list=PLebww9DYmRqO5P57v2Sr3zFOBeaWCj8If&index=6 )
+        
+        - Has many through : tree or more table passing through  ( country -> users -> post ) retrive contry of posts passing by users
+
+    - Mutators & accessor / Casting ( see form model ) : cast is the way to chage the type of data retrived from db ( string to boolean ... )
+                                                         accessor is to change the value of data after retrived (get) it from db ( lowercase to upercase ... )
+                                                         mutators is the opposit of accessor , that is change the value of data when it is stored (set) in db       
+
+    - authentication and authorization : authentication verifies the identity of a user or service before granting them access 
+                                         authorization while the other determines what they can do once they have access
+
+        - authorization : aravel provides two primary ways of authorizing actions: gates and policies. Think of gates and policies like routes and controllers. 
+            Gates provide a simple, closure-based approach to authorization while policies, like controllers, group logic around a particular model or resource. 
+            You do not need to choose between exclusively using gates or exclusively using policies when building an application. 
+            Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy )
+
+

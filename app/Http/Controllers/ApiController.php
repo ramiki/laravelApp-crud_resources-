@@ -36,7 +36,7 @@ class ApiController extends Controller
             "data" => $forms
         ]; 
 
-       // call  : http://127.0.0.1:8000/api/forms
+       // call  : http://127.0.0.1:8000/api/forms?page=1 ....
        // method: GET
     }
 

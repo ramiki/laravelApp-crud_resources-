@@ -7,7 +7,8 @@
                 <h2>Edit profile : </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('forms.show', $form->id) }}" title="Go back"> <i class="fas fa-backward "></i> </a>
+                {{-- <a class="btn btn-primary" href="{{ route('forms.show', $form->id) }}" title="Go back"> <i class="fas fa-backward "></i> </a> --}}
+                <a class="btn btn-primary" href="{{ url('forms') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>

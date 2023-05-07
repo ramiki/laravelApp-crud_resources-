@@ -14,6 +14,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
+        
             //mapping form model with its policy
         'App\Models\Form' => 'App\Policies\FormPolicy',
 

@@ -9,6 +9,14 @@
                 <a class="btn btn-success" href="{{ route('forms.create') }}" title="Create a form"> <i class="fas fa-plus-circle"></i>
                     </a>
             </div>
+
+            {{-- if is_admin = true show button to send eamil --}}
+            @if(auth::user()->is_admin)
+            <div class="text-center">
+                <a class="btn btn-warning" href="{{ route('forms.mail') }}" title="Create a form"> Send mail :  <i class="fas fa-plus-circle"></i>
+                    </a>
+            </div>
+            @endcan
         </div>
     </div>
 
@@ -116,10 +124,9 @@
 {{-- {{ ddd(auth()->user())  }}   --}}
  
 
-
-
-
 {{-- cards view --}}
+
+
 
 <br>
 
@@ -127,6 +134,9 @@
 
 <div class="row">
 @foreach ($forms as $form)
+
+{{-- other methode to retrive forms and directly check if empty  --}}
+{{-- @forelse ($forms as $form) --}}
 <div class="col-sm-6 col-md-3">
 
 <div class="card" style="width: 16rem;">
@@ -137,13 +147,14 @@
    
     <ul class="list-group list-group-flush">
       <li class="list-group-item"><strong>Name :</strong> {{ $form->name }}</li>
-      <li class="list-group-item"> <strong>Age:</strong> {{ $form->age }}</li>
-      @if(auth::user()->is_admin)
+      <li class="list-group-item"> <strong>Age:</strong> {{ $form->age }}</li> 
+      {{-- @if(auth::user()->is_admin) --}}
+      @if( $form->user_id == auth::id())
       <li class="list-group-item text-success"> <strong>by :</strong> {{ $form->user->name }}</li>
       @endif
     </ul>
 
-        <div class="card-body bg-secondary text-center" >
+    <div class="card-body bg-secondary text-center" >
         <a href="{{ route('forms.show', $form->id) }}" class="d-block card-link btn btn-primary">Show Profile</a>
         @can('update' , $form)
       <br>
@@ -151,14 +162,14 @@
         @endcan
         @can('delete' , $form)
       <br>
-      <div style="display: inline-block;">
-        <form action="{{ route('forms.destroy', $form->id) }}" method="POST">
-            @csrf
-            @method('DELETE')
-            <button type="submit" title="delete" class="card-link btn btn-danger">
-                <span> Delete Profile</span>
-            </button>                       
-        </form>
+        <div style="display: inline-block;">
+            <form action="{{ route('forms.destroy', $form->id) }}" method="POST">
+             @csrf
+             @method('DELETE')
+                <button type="submit" title="delete" class="card-link btn btn-danger">
+                 <span> Delete Profile</span>
+                </button>                       
+            </form>
         </div> 
         @endcan  
      </div>
@@ -166,6 +177,7 @@
     </div>
 </div>
         @endforeach
+        {{-- @empty --}}
     </div>
 
 
@@ -173,6 +185,8 @@
 @else 
 <h5> empty users !</h5>
 @endif
+{{-- @endforelse --}}
+
     <div class="d-flex">
         {{-- Displaying Pagination Results , for more edtails look at : https://laravel.com/docs/7.x/pagination --}}
     {!!  $forms->links() !!}  

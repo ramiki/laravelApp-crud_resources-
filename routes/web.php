@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\testFormController;
-
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConsumControlle;
 
 // Customizing Missing Model Behavior:
@@ -24,6 +24,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+// reltionship (test)
+// Route::get('test/{id}', function ($id) {
+//     $user = \App\Models\user::findorfail($id);
+//     $user->forms()->updateorcreate(["user_id" => $user->id],['name' => 'update d mark']);
+//     // dd($user->forms);
+//     foreach ($user->forms as $k) {
+//         echo $k->name ;
+//         echo '<br>';
+//     }
+// });
+
 //  route url get parametred (jus test )
 /* route::get('test/{n}', function ($n)  {
     echo   " hello " . $n ;   
@@ -37,26 +49,39 @@ Route::get('/', function () {
 Route::get('form/{test}', [testFormController::class, 'form_test'])->name('form.bar');
 Route::post('form', [testFormController::class, 'form_p_test']);
 
+//email sender
+Route::get('forms/mail', [FormController::class, 'send'])->name('forms.mail');
+//email template ( to check , get it with out data)
+// Route::get('forms/m',function () { return view('forms/mail'); });
+
+//contact us
+Route::get('contact-us', [ContactController::class, 'index'])->name('contact-us');
+//contact us email template ( to check , get it with out data)
+// Route::get('contact', function () { return view('emails.contact'); });
+Route::post('contact-us', [ContactController::class, 'store'])->name('contact.us.store');
 
 // forms route with crud name ( form.index - form.show .....)
 // Route::resource() is a helper method that generates individual routes
 // see Naming Resource Routes in laravel doc to rename the resources default names 
-Route::resource('forms', FormController::class)->middleware('auth')
+// middleware for email verification and authentification
+Route::resource('forms', FormController::class)->middleware('verified' , 'auth')
     // change param name of resouces : 
     // ->parameters(['forms' => 'something'])
 
     // Customizing Missing Model Behavior , redirect if resources methode name was not matched ( ../forms/foo ) :
     ->missing(function (Request $request) {
-        return Redirect::route('forms.index');
-    });
+        return Redirect::route('forms.index');})
+    ;
 
 
 // routes added by ui auth
 // by adding ->middleware('auth') to end of routes like above we protect it with the euth
-Auth::routes();
+// active eamail verifycation 
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// home default raderect
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth' , 'verified')->name('home');
 
 // api conssomation routes
-Route::get('cons', [ConsumControlle::class, 'get']);
-Route::get('post', [ConsumControlle::class, 'creat']);
+Route::get('cons', [ConsumController::class, 'get']);
+Route::get('post', [ConsumController::class, 'creat']);

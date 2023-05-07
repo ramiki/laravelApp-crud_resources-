@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Form;
+
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 // add aditionale request for validation
 use App\Http\Requests\formsRequest;
-
+use App\Models\Form;
 use GuzzleHttp\Middleware;
 // use Illuminate\support\str;
+
+// add for mail
+use Illuminate\Support\Facades\Mail;
+use App\Mail\testmail;
 
 // use Auth;
 
 // DB facade
 use Illuminate\Support\Facades\DB;
+use Symfony\Component\VarDumper\VarDumper;
 
 class FormController extends Controller
 {
@@ -36,6 +41,10 @@ class FormController extends Controller
 
     public function index()
     {
+        // test relationship
+        // $user = \App\Models\user::findorfail(3);
+        // dd($user->forms[0]->name) ;
+
 
         // test queries using the DB facade. it provides methods for each type of query: select, update, insert, delete, and statement. 
         // $forms = DB::select('select * from forms');
@@ -48,10 +57,10 @@ class FormController extends Controller
         // we can change latest() to all() for get all records 
         // check for admin
         if (auth::user()->is_admin) {
-            $forms = form::latest()->paginate(20);  // adding ->pagination(5) for pagination with 5 pages ( ref : https://laravel.com/docs/7.x/pagination )
+            $forms = Form::latest()->paginate(20);  // adding ->pagination(5) for pagination with 5 pages ( ref : https://laravel.com/docs/7.x/pagination )
         } else {
             // $forms = form::where('user_id' , auth()->user()->id)->paginate(20); // retrive forms of auth user only , by id
-            $forms = auth()->user()->forms()->paginate(8); // retrive forms of auth user only , by relationhip
+            $forms = auth()->user()->forms()->paginate(8); // retrive forms of auth user only , by relationhip ( forms() is the methode of relationship in the user modele )
         }
 
         // return view('forms.index')->with('forms' , $forms)   //  with is used to add data to the current request object, making it available to the view
@@ -215,5 +224,25 @@ class FormController extends Controller
         $form->delete();
         return redirect()->route('forms.index')
             ->with('success', 'form deleted successfully');
+    }
+
+    // send templated email
+    public function send(Request $request)
+    {
+
+
+        // $form = Form::findOrFail($request->user_id);
+
+        //send to all with data
+        // $forms = Form::All();
+
+        $form = Form::where('email', 'ramikii41@gmail.com')->first();
+
+            Mail::to($form->email)->send(new testmail($form));
+
+        // send to specified mail wihout data ( for test )
+            // Mail::to(['ramikii41@gmail.com'])->send(new testmail());
+
+        return redirect()->route('forms.index')->with('success', 'email sent successfully');
     }
 }

@@ -25,7 +25,7 @@
             
             @if (Route::has('login'))
                 <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                    {{-- In Laravel, the @auth directive is used to check if the user is authenticated or not --}}
+                    {{-- In Laravel, the @auth directive is used to check if the user is authenticated or not ( opposite to guest --}}
                     @auth
                         <a href="{{ url('/home') }}" class="text-sm text-gray-700 underline">Home</a>
                         <br>
