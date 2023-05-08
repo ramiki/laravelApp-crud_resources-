@@ -222,4 +222,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
             You do not need to choose between exclusively using gates or exclusively using policies when building an application. 
             Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy ) .
 
+    - mail fix ssl bug laravel 7 ! : 
+               error : stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages: error:1416F086:SSL 
+               routines:tls_process_server_certificate:certificate verify failed
+
+               fix :  go to the file vendor\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php and comment out the code 
+               $options = []; and paste the code $options['ssl'] = array('verify_peer' => false, 'verify_peer_name' => false, 
+               'allow_self_signed' => true);
+
 
