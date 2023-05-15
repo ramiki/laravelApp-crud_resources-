@@ -141,11 +141,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       make:cast             // ** converting attributes (retrived data from model) to common data types (string o int ...).
                                      the same of 'Accessors & Mutators' for data converting
       make:channel
-      make:command
-      make:component       //
+      make:command         // create a new command, This command will create a new command class in the app/Console/Commands directory. (not used yet)
+      make:component       // create a class based component, The make:component command will place the component in the app/View/Components directory
+                                If you would like to create an anonymous component (a component with only a Blade template and no class), you may use the --view flag
+                                php artisan make:component forms.input --view
       make:controller      // ** make a controller
       make:event
-      make:exception
+      make:exception       // command will create a file under the app/Exceptions folder for exception , Custom exceptions allow you to define and handle specific application 
+                                exceptions in a structured way
+                                To handle this custom exception, Laravel provides an ExceptionHandler class located at app/Exceptions/Handler.php.
+                                You can add custom exception handling logic to this class.
       make:factory         // ** generate data (faker)
       make:job
       make:listener
@@ -180,7 +185,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       app:name      // Creating user defined namespace ( change the namespace to match with web application )
       -V            // laravel Version    ( also : composer -V , php -v )
       storage:link  // link the storage dir to public ( to access uploaded file ) look at : config/filesystem.php
-
+      vendor:publish// when a package's users execute the vendor:publish command, his files will be copied to the specified location.
 
 # notes  :  ( DRY : Dont Repeat Yourself )
     
@@ -192,7 +197,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     - To obtain an instance of the current HTTP request via dependency injection, you should type-hint the Illuminate\Http\Request class on your route closure or controller method.
         The incoming request instance will automatically be injected by the Laravel service container :   public function store(Request $request)  { ... }
     
-    - Change validation lunguage : (see /config/app.php)
+    - Change validation lunguage : (see /config/app.php)  
+       retrieve translation strings from your language files : echo __('messages.welcome'); look at doc "localization"
     
     - Errors view : we add a folder with "errors" name and a file with the number of errors "403.blade.php    (see /view/errors) 
     
@@ -225,8 +231,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     - mail fix ssl bug laravel 7 ! : 
                error : stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages: error:1416F086:SSL 
                routines:tls_process_server_certificate:certificate verify failed
+               
+               fix 1 : look at config/mail.php
 
-               fix :  go to the file vendor\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php and comment out the code 
+               fix 2 :  go to the file vendor\swiftmailer\lib\classes\Swift\Transport\StreamBuffer.php and comment out the code 
                $options = []; and paste the code $options['ssl'] = array('verify_peer' => false, 'verify_peer_name' => false, 
                'allow_self_signed' => true);
 
