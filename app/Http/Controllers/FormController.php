@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Event;
 use App\Events\formadd;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+// use Illuminate\Support\Facades\Auth; // error in view use Auth instead
+use Auth;
 
 // add aditionale request for validation
 use App\Http\Requests\formsRequest;
@@ -120,10 +122,12 @@ class FormController extends Controller
         }
         $data['user_id'] = Auth()->user()->id;
 
-        form::create($data);
+         $form = form::create($data);
 
-        event(new FormAdd($data));
-
+        if($form){
+        Event(new FormAdd($form));
+        }
+        
         // bad methode
         //     if( $request->hasFile('photo') ){
         //         $request['image'] = $request->photo->store('image');

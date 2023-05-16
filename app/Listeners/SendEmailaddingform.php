@@ -28,6 +28,6 @@ class SendEmailaddingform
      */
     public function handle(FormAdd $event)
     {
-        Mail::to($event->user->email)->send(new testmail($event->Form));
+        Mail::to(['ramikii41@gmail.com'])->send(new testmail($event->data));
     }
 }
