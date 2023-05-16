@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Events\formadd;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -121,6 +121,8 @@ class FormController extends Controller
         $data['user_id'] = Auth()->user()->id;
 
         form::create($data);
+
+        event(new FormAdd($data));
 
         // bad methode
         //     if( $request->hasFile('photo') ){

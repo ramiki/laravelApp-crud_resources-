@@ -142,18 +142,19 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                      the same of 'Accessors & Mutators' for data converting
       make:channel
       make:command         // create a new command, This command will create a new command class in the app/Console/Commands directory. (not used yet)
+                               Make sure to register your custom command in the app/Console/Kernel.php file's commands array to make it available for execution
       make:component       // create a class based component, The make:component command will place the component in the app/View/Components directory
                                 If you would like to create an anonymous component (a component with only a Blade template and no class), you may use the --view flag
                                 php artisan make:component forms.input --view
       make:controller      // ** make a controller
-      make:event
+      make:event           // creat an event
+      make:listener        // creat a listener ( add --event=event_name ) to attache the listener with his event
       make:exception       // command will create a file under the app/Exceptions folder for exception , Custom exceptions allow you to define and handle specific application 
                                 exceptions in a structured way
                                 To handle this custom exception, Laravel provides an ExceptionHandler class located at app/Exceptions/Handler.php.
                                 You can add custom exception handling logic to this class.
       make:factory         // ** generate data (faker)
       make:job
-      make:listener
       make:mail            // ** create a "Email" file in app/mail/testmail.php for mail class "build" to define view and subject ...
                                     Markdown mailable messages allow you to take advantage of the pre-built templates and components ( blade ) of mail notifications in your mailables
                                     sender location : app/mail/contactMail.php     &  template location : view/mails/contat.blade.php
@@ -186,6 +187,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       -V            // laravel Version    ( also : composer -V , php -v )
       storage:link  // link the storage dir to public ( to access uploaded file ) look at : config/filesystem.php
       vendor:publish// when a package's users execute the vendor:publish command, his files will be copied to the specified location.
+      event:generate// generate an event and listner if not foun based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
+                       Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
+      event:list    // list all events and ther listeners after registrated an genered
 
 # notes  :  ( DRY : Dont Repeat Yourself )
     

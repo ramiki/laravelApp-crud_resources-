@@ -245,7 +245,7 @@
 																				<th class="column-top" width="260" style="font-size:0pt; line-height:0pt; padding:0; margin:0; font-weight:normal; vertical-align:top;">
 																					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 																						<tr>
-																							<td class="fluid-img" style="padding-bottom: 10px; font-size:0pt; line-height:0pt; text-align:left;"><img src="http://160.177.11.230:8080/my/laravelApp-crud_resources-/public/images/image1.jpg" width="260" height="185" editable="true" border="0" alt="" /></td>
+																							<td class="fluid-img" style="padding-bottom: 10px; font-size:0pt; line-height:0pt; text-align:left;"><img src="http://196.89.34.20:8080/my/laravelApp-crud_resources-/public/images/image1.jpg" width="260" height="185" editable="true" border="0" alt="" /></td>
 																						</tr>
 																						<tr>
 																							<td class="fluid-img" style="font-size:0pt; line-height:0pt; text-align:left;"><img src="/images/image4.jpg" width="260" height="185" editable="true" border="0" alt="" /></td>
