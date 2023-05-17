@@ -28,6 +28,7 @@ class SendEmailaddingform
      */
     public function handle(FormAdd $event)
     {
+        // send mail by the listener if the event lanced or fired
         Mail::to(['ramikii41@gmail.com'])->send(new testmail($event->data));
     }
 }

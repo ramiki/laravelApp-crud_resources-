@@ -125,6 +125,7 @@ class FormController extends Controller
          $form = form::create($data);
 
         if($form){
+            //lance or fire the event if form created
         Event(new FormAdd($form));
         }
         

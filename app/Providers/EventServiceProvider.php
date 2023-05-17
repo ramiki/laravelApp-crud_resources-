@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\testmail;
 use App\Models\Form;
 
-use App\Events\formadd;
+use App\Events\FormAdd;
 use App\Listeners\SendEmailaddingform;
 
 use Illuminate\Auth\Events\Registered;
@@ -18,6 +18,8 @@ class EventServiceProvider extends ServiceProvider
 {
     /**
      * The event listener mappings for the application.
+     * generate an event and listner if not found by " php artisan event:generate " cmd
+     *                 Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
      *
      * @var array
      */

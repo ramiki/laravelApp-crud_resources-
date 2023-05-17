@@ -187,7 +187,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       -V            // laravel Version    ( also : composer -V , php -v )
       storage:link  // link the storage dir to public ( to access uploaded file ) look at : config/filesystem.php
       vendor:publish// when a package's users execute the vendor:publish command, his files will be copied to the specified location.
-      event:generate// generate an event and listner if not foun based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
+      event:generate// generate an event and listner if not found based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
                        Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
       event:list    // list all events and ther listeners after registrated an genered
 
