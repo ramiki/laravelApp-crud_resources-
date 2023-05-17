@@ -205,10 +205,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
        retrieve translation strings from your language files : echo __('messages.welcome'); look at doc "localization"
     
     - Errors view : we add a folder with "errors" name and a file with the number of errors "403.blade.php    (see /view/errors) 
+
+    - abort : Throw an HttpException with the given data   ex : ( abort(403, 'Your email address is not verified.') )
     
     - Edit /config/database.php file, search for mysql entry and change:
         'engine' => null,    to  'engine' => 'InnoDB',
-         This saves you from adding $table->engine = "InnoDB"; for each of your Schemas ;)
+         This saves you from adding $table->engine = "InnoDB"; for each of your Schemas
 
     - In relationship we can change $users = User::all(); to $users = User::with('comments')->get();  to performe queries ( specified relationned table ('comment') before the call)
        ( instead of repeat queries it can resume it ) see ref : with() of models 
@@ -224,10 +226,10 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                                          accessor is to change the value of data after retrived (get) it from db ( lowercase to upercase ... )
                                                          mutators is the opposit of accessor , that is change the value of data when it is stored (set) in db       
 
-    - authentication and authorization : authentication verifies the identity of a user or service before granting them access 
-                                         authorization while the other determines what they can do once they have access
+    - authentication and authorization : authentication verifies the identity of a user or service before granting them access like gards (see app/http/kernel) in routes 
+                                         authorization  determines what they can do once they have access
 
-        - authorization : aravel provides two primary ways of authorizing actions: gates and policies. Think of gates and policies like routes and controllers. 
+        - authorization : laravel provides two primary ways of authorizing actions: gates and policies. Think of gates and policies like routes and controllers. 
             Gates provide a simple, closure-based approach to authorization while policies, like controllers, group logic around a particular model or resource. 
             You do not need to choose between exclusively using gates or exclusively using policies when building an application. 
             Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy ) .

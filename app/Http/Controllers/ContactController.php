@@ -9,6 +9,8 @@ use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMail;
 
+use Illuminate\Support\Facades\Gate;
+
 class ContactController extends Controller
 {
     /**
@@ -18,6 +20,13 @@ class ContactController extends Controller
      */
     public function index()
     {
+        // use the gate ( authorize this page only if admin )
+       if (!Gate::allows('access-admin')){
+        abort('401');
+    }
+
+
+
         return view('contactForm');
     }
   
