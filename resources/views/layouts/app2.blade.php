@@ -36,6 +36,72 @@
         /* ----------------notification bi bell-------------------- */
 
 
+        /* CSS used here will be applied after bootstrap.css */
+
+.dropdown {
+    display:inline-block;
+    margin-left:20px;
+    padding:10px;
+  }
+
+
+.bi-bell-fill {
+   
+    font-size:20px;
+  }
+
+.notifications {
+   min-width:420px; 
+  }
+  
+  .notifications-wrapper {
+     overflow:auto;
+      max-height:250px;
+    }
+    
+ .menu-title {
+     color:#ff7788;
+     font-size:1.5rem;
+      display:inline-block;
+      }
+ 
+.bi-circle-arrow-right {
+      margin-left:10px;     
+   }
+  
+   
+ .notification-heading, .notification-footer  {
+ 	padding:2px 10px;
+       }
+      
+        
+.dropdown-menu.divider {
+  margin:5px 0;          
+  }
+
+.item-title {
+  
+ font-size:1.3rem;
+ color:#000;
+    
+}
+
+.notifications a.content {
+ text-decoration:none;
+ background:#ccc;
+
+ }
+    
+.notification-item {
+ padding:10px;
+ margin:5px;
+ background:#ccc;
+ border-radius:4px;
+ }
+
+
+
+
 
 
 
@@ -110,7 +176,7 @@
 
                       {{-- ----------------------notification ------------------------- --}}
 
-                      <li class="dropdown">
+                      {{-- <li class="dropdown">
                         <i class="bi bi-bell-fill " id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          
                         </i>
@@ -119,6 +185,48 @@
                           <a class="dropdown-item" href="#">Another action</a>
                           <a class="dropdown-item" href="#">Something else here</a>
                         </div>
+                    </li> --}}
+
+
+
+
+                    <li class="nav-item dropdown">
+                        <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
+                          <i class="bi bi-bell-fill"></i>
+                        </a>
+                        
+                        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+                          
+                          <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="bi bi-circle-arrow-right"></i></h4>
+                          </div>
+                          <li class="divider"></li>
+                         <div class="notifications-wrapper">
+                           <a class="content" href="#">
+                            
+                             <div class="notification-item">
+                              <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                              <p class="item-info">Marketing 101, Video Assignment</p>
+                            </div>
+                             
+                          </a>
+                           <a class="content" href="#">
+                            <div class="notification-item">
+                              <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
+                              <p class="item-info">Marketing 101, Video Assignment</p>
+                            </div>
+                          </a>
+                           <a class="content" href="#">
+                            <div class="notification-item">
+                              <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
+                              <p class="item-info">Marketing 101, Video Assignment</p>
+                            </div>
+                          </a>
+                      
+                         </div>
+                          <li class="divider"></li>
+                          <div class="notification-footer"><h4 class="menu-title">View all<i class="bi bi-circle-arrow-right"></i></h4></div>
+                        </ul>
+                        
                     </li>
 
                    {{-- ----------------------------------------------- --}}

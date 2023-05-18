@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers;
 
+// events 
 use Illuminate\Support\Facades\Event;
 use App\Events\formadd;
+
 use App\Models\User;
-use Illuminate\Http\Request;
-// use Illuminate\Support\Facades\Auth; // error in view use Auth instead
-use Auth;
 
 // add aditionale request for validation
 use App\Http\Requests\formsRequest;
 use App\Models\Form;
+use Illuminate\Http\Request;
+
 use GuzzleHttp\Middleware;
 // use Illuminate\support\str;
 
@@ -19,10 +20,17 @@ use GuzzleHttp\Middleware;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\testmail;
 
+// notificaitons
+use App\Notifications\CreatedForm;
+use Illuminate\Support\Facades\Notification;
+
 // use Auth;
+// use Illuminate\Support\Facades\Auth; // error in view use Auth instead
+use Auth;
 
 // DB facade
 use Illuminate\Support\Facades\DB;
+
 use Symfony\Component\VarDumper\VarDumper;
 
 class FormController extends Controller
@@ -123,6 +131,21 @@ class FormController extends Controller
         $data['user_id'] = Auth()->user()->id;
 
          $form = form::create($data);
+
+         //select all users exept the user who is euthentified
+         $users = user::where('id', '!=' , Auth()->user()->id)->get() ;
+
+         $user_creat = Auth()->user()->name ;
+
+         //use notification facade ( send notification for multi user )
+        //  Notification::send($users,new CreatedForm($form->id,$user_creat));
+
+         //use notification trait ( send notification for single user "foreach" it for multi users) ,
+        // $users is a collection, so calling notify method on a collection will lead to error. And the method notify only exist on user object instance
+         //The Notifiable trait is included on your application's App\Models\User model by default
+         foreach ($users as $user) {
+            $user->notify(new CreatedForm($form->id,$user_creat));        }
+
 
         if($form){
             //lance or fire the event if form created

@@ -190,6 +190,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       event:generate// generate an event and listner if not found based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
                        Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
       event:list    // list all events and ther listeners after registrated an genered
+      notifications:table // create a database table to hold your notifications. generate a migration with the proper table built-in notification schema
 
 # notes  :  ( DRY : Dont Repeat Yourself )
     
