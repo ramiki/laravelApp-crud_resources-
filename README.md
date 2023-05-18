@@ -161,7 +161,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       make:middleware      // ** make a middleware ( access control ) mechanism for filtering HTTP requests entering your application
       make:migration       // ** make migration ( creat table , column ...)
       make:model           // ** make model
-      make:notification    // ** 
+      make:notification    // ** creat notification , each notification is represented by a single class that is typically stored in the app/Notifications
       make:observer
       make:policy          // ** make a policy and gates "Gate is the same as Permission" ( classes that organize authorization logic around a particular model or resource )
       make:provider
