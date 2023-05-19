@@ -38,21 +38,33 @@
 
         /* CSS used here will be applied after bootstrap.css */
 
-.dropdown {
+/* .dropdown {
     display:inline-block;
     margin-left:20px;
     padding:10px;
-  }
+  } */
 
+          /* .notifications {
+   min-width:420px; 
+    } */ 
+        
+/* .dropdown-menu.divider {
+  margin:5px 0;          
+  } */
+ 
 
 .bi-bell-fill {
    
     font-size:20px;
   }
 
-.notifications {
-   min-width:420px; 
+  .dropdown-menu {
+  width: 20rem;         
   }
+
+  .notification-heading, .notification-footer  {
+ 	padding:2px 10px;
+       }
   
   .notifications-wrapper {
      overflow:auto;
@@ -61,23 +73,15 @@
     
  .menu-title {
      color:#ff7788;
-     font-size:1.5rem;
+     /* font-size:1.5rem; */
       display:inline-block;
       }
- 
-.bi-circle-arrow-right {
-      margin-left:10px;     
-   }
-  
-   
- .notification-heading, .notification-footer  {
- 	padding:2px 10px;
-       }
+
       
+      .bi-circle-arrow-right {
+          margin-left:10px;     
+        }
         
-.dropdown-menu.divider {
-  margin:5px 0;          
-  }
 
 .item-title {
   
@@ -99,10 +103,17 @@
  border-radius:4px;
  }
 
-
-
-
-
+ .bi-bell-fill .badge {
+  position: absolute;
+  top: -10px;
+  right: -15px;
+  padding: 2px 8px;
+  border-radius: 50%;
+  background-color: red;
+  color: white;
+  font-size: 10px;
+  opacity: 0.7;
+}
 
 
         /* ------------------------------------------------------------ */
@@ -136,7 +147,6 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        <a class="nav-link" href="{{ route('contact-us') }}">{{ __('contact-us') }}</a>
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -151,15 +161,20 @@
                                 </li>
                             @endif
                         @else
+
+                                <li class="nav-item">
+                                     <a class="nav-link" href="{{ route('contact-us') }}">{{ __('contact-us') }}</a>
+                                </li>
+
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('forms.index') }}">{{ __('Forms') }}</a>
                                 </li>
 
 
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
-                                </a>
+                                <li class="nav-item dropdown">
+                                    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                          {{ Auth::user()->name }}
+                                    </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
@@ -192,7 +207,8 @@
 
                     <li class="nav-item dropdown">
                         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                          <i class="bi bi-bell-fill"></i>
+                          <i class="bi bi-bell-fill"><span class="badge">5</span></i>
+                          
                         </a>
                         
                         <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
