@@ -138,19 +138,19 @@ class FormController extends Controller
          $user_creat = Auth()->user()->name ;
 
          //use notification facade ( send notification for multi user )
-        //  Notification::send($users,new CreatedForm($form->id,$user_creat));
+         Notification::send($users,new CreatedForm($form->id,$user_creat));
 
          //use notification trait ( send notification for single user "foreach" it for multi users) ,
         // $users is a collection, so calling notify method on a collection will lead to error. And the method notify only exist on user object instance
          //The Notifiable trait is included on your application's App\Models\User model by default
-         foreach ($users as $user) {
-            $user->notify(new CreatedForm($form->id,$user_creat));        }
+        //  foreach ($users as $user) {
+            // $user->notify(new CreatedForm($form->id,$user_creat));        }
 
 
-        if($form){
-            //lance or fire the event if form created
-        Event(new FormAdd($form));
-        }
+        // if($form){
+        //     //lance or fire the event if form created
+        // Event(new FormAdd($form));
+        // }
         
         // bad methode
         //     if( $request->hasFile('photo') ){

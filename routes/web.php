@@ -78,7 +78,8 @@ Route::resource('forms', FormController::class)->middleware('verified' , 'auth')
 // routes added by ui auth
 // by adding ->middleware('auth') to end of routes like above we protect it with the euth
 // active eamail verifycation 
-Auth::routes(['verify' => true]);
+// Auth::routes(['verify' => true]);
+Auth::routes();
 
 // home default raderect
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth' , 'verified')->name('home');

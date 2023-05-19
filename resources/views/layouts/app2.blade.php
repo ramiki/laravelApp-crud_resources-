@@ -207,36 +207,29 @@
 
                     <li class="nav-item dropdown">
                         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                          <i class="bi bi-bell-fill"><span class="badge">5</span></i>
+                            {{-- get the number of notification ( retrive the notifications by notifiable_id field ) --}}
+                          <i class="bi bi-bell-fill"><span class="badge">{{ Auth::User()->unreadNotifications->count()}}</span></i>
                           
                         </a>
                         
-                        <ul class="dropdown-menu notifications" role="menu" aria-labelledby="dLabel">
+                        <ul class="dropdown-menu dropdown-menu-right text-right notifications" role="menu" aria-labelledby="dLabel">
                           
                           <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="bi bi-circle-arrow-right"></i></h4>
                           </div>
                           <li class="divider"></li>
                          <div class="notifications-wrapper">
-                           <a class="content" href="#">
+                           
                             
+                            @foreach (Auth::User()->unreadNotifications as $notification)
+
+                            <a class="content" href="{{ route('forms.show', $notification->data['form_id']) }}">
                              <div class="notification-item">
-                              <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                              <p class="item-info">Marketing 101, Video Assignment</p>
-                            </div>
-                             
-                          </a>
-                           <a class="content" href="#">
-                            <div class="notification-item">
-                              <h4 class="item-title">Evaluation Deadline 1 · day ago</h4>
-                              <p class="item-info">Marketing 101, Video Assignment</p>
+                              <h4 class="item-title">A Student was Added {{$notification->created_at->diffForHumans()}} ago</h4>
+                              <p class="item-info">By Mr.{{$notification->data['user_created'] }} & Student Name {{ $notification->data['form_id']}}</p>
                             </div>
                           </a>
-                           <a class="content" href="#">
-                            <div class="notification-item">
-                              <h4 class="item-title">Evaluation Deadline 1 • day ago</h4>
-                              <p class="item-info">Marketing 101, Video Assignment</p>
-                            </div>
-                          </a>
+
+                          @endforeach
                       
                          </div>
                           <li class="divider"></li>
