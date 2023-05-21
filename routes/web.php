@@ -5,10 +5,11 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\testFormController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ConsumControlle;
-
+use App\Models\User;
 // Customizing Missing Model Behavior:
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +66,8 @@ Route::post('contact-us', [ContactController::class, 'store'])->name('contact.us
 // Route::resource() is a helper method that generates individual routes
 // see Naming Resource Routes in laravel doc to rename the resources default names 
 // middleware for email verification and authentification
-Route::resource('forms', FormController::class)->middleware('verified' , 'auth')
+// Route::resource('forms', FormController::class)->middleware('verified' , 'auth')
+Route::resource('forms', FormController::class)->middleware('auth')
     // change param name of resouces : 
     // ->parameters(['forms' => 'something'])
 
@@ -73,6 +75,23 @@ Route::resource('forms', FormController::class)->middleware('verified' , 'auth')
     ->missing(function (Request $request) {
         return Redirect::route('forms.index');})
     ;
+
+    // notification mark as read 
+    Route::get('notification/markasread', function () {
+        // DB::table('notifications')->where('notifiable_id' , Auth()->user()->id )->update(['read_at' => now()]);
+
+        // or
+        $user = User::find(Auth()->user()->id);
+        // foreach ($user->notifications as $notification) {
+        //     $notification->markAsRead();
+        // }
+        //or
+        // $user->unreadNotifications()->update(['read_at' => now()]);
+        // or delete all notification 
+        $user->notifications()->delete();
+
+        return Redirect::route('forms.index');
+        })->name('markasread');
 
 
 // routes added by ui auth

@@ -12,6 +12,7 @@ class CreatedForm extends Notification
     use Queueable;
 
     private $form_id ;
+    private $form_name ;
     private $user_created ;
 
     /**
@@ -19,9 +20,10 @@ class CreatedForm extends Notification
      *
      * @return void
      */
-    public function __construct($form_id , $user_created)
+    public function __construct($form_id,$form_name,$user_created)
     {
         $this->form_id = $form_id;
+        $this->form_name = $form_name;
         $this->user_created = $user_created;
     }
 
@@ -36,10 +38,12 @@ class CreatedForm extends Notification
 
         //Every notification class has a via method that determines on which
         // channels the notification will be delivered. Notifications may be 
-        // sent on the mail, database, broadcast, nexmo, and slack channels.
+        // sent on the mail "or and" database , broadcast, nexmo, and slack channels.
+        
+        // just add uncomment return mail and function toMail to send notification to email either
         // in this exemple we used databese : 
 
-        // return ['mail'];
+        // return ['mail' , 'database'];
         return ['database'];
     }
 
@@ -69,10 +73,11 @@ class CreatedForm extends Notification
     {
         return [
             'form_id' => $this->form_id,
+            'form_name' => $this->form_name ,
 
-            // $user_created = $this->user_created;
-            // or :
             'user_created' => Auth()->user()->name,
+            //or
+            // $user_created = $this->user_created;
             
         ];
     }

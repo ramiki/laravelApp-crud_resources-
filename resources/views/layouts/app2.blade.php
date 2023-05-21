@@ -85,7 +85,7 @@
 
 .item-title {
   
- font-size:1.3rem;
+ font-size:1rem;
  color:#000;
     
 }
@@ -203,29 +203,33 @@
                     </li> --}}
 
 
-
+                    @if ( auth::user()->is_admin && Auth::User()->unreadNotifications->count() >= 1 )
 
                     <li class="nav-item dropdown">
                         <a id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="/page.html">
-                            {{-- get the number of notification ( retrive the notifications by notifiable_id field ) --}}
+                            {{-- get the number of notification sent to auth user ( retrive the notifications by notifiable_id field ) --}}
                           <i class="bi bi-bell-fill"><span class="badge">{{ Auth::User()->unreadNotifications->count()}}</span></i>
                           
                         </a>
+
+                       
                         
                         <ul class="dropdown-menu dropdown-menu-right text-right notifications" role="menu" aria-labelledby="dLabel">
                           
-                          <div class="notification-heading"><h4 class="menu-title">Notifications</h4><h4 class="menu-title pull-right">View all<i class="bi bi-circle-arrow-right"></i></h4>
-                          </div>
+                          <div class="notification-heading"><h4 class="menu-title">Notifications</h4> <a href="{{ route('markasread')}}" class="menu-title pull-right"><h5>Mark All As Read</h5><i class="bi bi-circle-arrow-right"></i></a></div>
+
+                          {{-- <div class="notification-heading"></div> --}}
+                          
                           <li class="divider"></li>
                          <div class="notifications-wrapper">
                            
-                            
+                            {{-- retrive all notifications sent to auth user ( retrive the notifications by notifiable_id field ) --}}
                             @foreach (Auth::User()->unreadNotifications as $notification)
 
                             <a class="content" href="{{ route('forms.show', $notification->data['form_id']) }}">
                              <div class="notification-item">
-                              <h4 class="item-title">A Student was Added {{$notification->created_at->diffForHumans()}} ago</h4>
-                              <p class="item-info">By Mr.{{$notification->data['user_created'] }} & Student Name {{ $notification->data['form_id']}}</p>
+                              <h4 class="item-title">Student <span style="color :blue ; font-size : 1.5rem">  {{$notification->data['form_name']}}  </span>  was Added {{$notification->created_at->diffForHumans()}} ago</h4>
+                              <p class="item-info">By Mr.{{$notification->data['user_created'] }} </p>
                             </div>
                           </a>
 
@@ -237,6 +241,8 @@
                         </ul>
                         
                     </li>
+
+                    @endif
 
                    {{-- ----------------------------------------------- --}}
                            

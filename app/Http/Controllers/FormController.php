@@ -138,7 +138,7 @@ class FormController extends Controller
          $user_creat = Auth()->user()->name ;
 
          //use notification facade ( send notification for multi user )
-         Notification::send($users,new CreatedForm($form->id,$user_creat));
+         Notification::send($users,new CreatedForm($form->id,$form->name,$user_creat));
 
          //use notification trait ( send notification for single user "foreach" it for multi users) ,
         // $users is a collection, so calling notify method on a collection will lead to error. And the method notify only exist on user object instance
@@ -191,6 +191,23 @@ class FormController extends Controller
         // $form->name = str::slug($form->name , '--');
         //or
         // $form->name = str_replace(' ', '_', $form->name);
+
+
+         // access to all notifications incomming to this user and read it 
+        // $user = User::find(Auth()->user()->id);
+        // foreach ($user->notifications as $notification) {
+        //         DB::table('notifications')->where('data->form_id',$form->id)->where('id', $notification->id)->update(['read_at' => now()]);
+        // }
+
+        //or 
+        // $getNotifId = DB::table('Notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->pluck('id');
+        // DB::table('notifications')->where('id' , $getNotifId)->update(['read_at' => now()]);
+        //or the mini way
+        // DB::table('notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->update(['read_at' => now()]);
+        // delete
+        DB::table('notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->delete();
+
+
 
         $this->authorize('view', $form);
 
