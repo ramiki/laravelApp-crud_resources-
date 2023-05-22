@@ -13,6 +13,7 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        // methode 1 : register a helper ( use in testcontroller )
            function format_date($date) {
         return date('F j, Y', strtotime($date));
     }

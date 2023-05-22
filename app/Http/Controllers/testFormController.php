@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\TestTrait;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\VarDumper;
 
 // use our helper for date format
 // use function App\Providers\format_date;
@@ -18,6 +21,8 @@ class testFormController extends Controller
     //      return "contact_us";
     //  }
    
+    // use test trait
+    use TestTrait ;
 
     public function form_test($t)
     {
@@ -27,6 +32,12 @@ class testFormController extends Controller
         //get the current date
         echo $date = now() ;
         echo "<br>";
+
+
+        // test trait 
+        $user = $this->getModel(user::class) ;
+        echo "<h5>" . $user->first()->id  ."</h5>" ;
+
 
         // get the current date with a helper function using a custom service provider
         echo format_date($date);
@@ -47,7 +58,7 @@ class testFormController extends Controller
     // in this case Laravel will attempt to find the request instance matching in place of type hinting  
     public function form_p_test(request $re)
     {    
-        // test simple helper json autoload methode : 
+        // test simple helper json autoload in (app.php) methode : 
        echo example_helper($re->input('username'));
 
         $n = 'random-num';
