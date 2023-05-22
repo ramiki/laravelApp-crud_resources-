@@ -12,6 +12,7 @@ class ConsumControlle extends Controller
   public function get()
   {
 
+    // http clien allowing you to quickly make outgoing HTTP requests to communicate with other web applications (see docs)
     // laravel methode : facade http and guzzle option
 
     $response =  Http::get('http://127.0.0.1/my/laravelApp-crud_resources-/public/api/forms/21');

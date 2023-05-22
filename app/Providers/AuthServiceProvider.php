@@ -32,8 +32,12 @@ class AuthServiceProvider extends ServiceProvider
 
         // register a gate ( use in contactcontroller.php )
     Gate::define('access-admin', function (User $user) {
-        return $user->is_admin ;
+        return $user->is_admin ;  // if $user->is_admin == true
     });
+
+    // new code wright php +7.4
+    // Gate::define('access-admin', fn(User $user) => $user->is_admin) ;
+
         //
     }
 }

@@ -140,7 +140,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
       make:cast             // ** converting attributes (retrived data from model) to common data types (string o int ...).
                                      the same of 'Accessors & Mutators' for data converting
-      make:channel
+      make:channel         //
       make:command         // create a new command, This command will create a new command class in the app/Console/Commands directory. (not used yet)
                                Make sure to register your custom command in the app/Console/Kernel.php file's commands array to make it available for execution
       make:component       // create a class based component, The make:component command will place the component in the app/View/Components directory
@@ -154,7 +154,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                 To handle this custom exception, Laravel provides an ExceptionHandler class located at app/Exceptions/Handler.php.
                                 You can add custom exception handling logic to this class.
       make:factory         // ** generate data (faker)
-      make:job
+      make:job             //
       make:mail            // ** create a "Email" file in app/mail/testmail.php for mail class "build" to define view and subject ...
                                     Markdown mailable messages allow you to take advantage of the pre-built templates and components ( blade ) of mail notifications in your mailables
                                     sender location : app/mail/contactMail.php     &  template location : view/mails/contat.blade.php
@@ -162,15 +162,16 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       make:migration       // ** make migration ( creat table , column ...)
       make:model           // ** make model
       make:notification    // ** creat notification , each notification is represented by a single class that is typically stored in the app/Notifications
-      make:observer
+      make:observer        // ** creat observers, If you are listening for many events on a given model, you may use observers to group all of your listeners into a single
+                                 class. Observer classes have method names which reflect the Eloquent events you wish to listen for ( created , updated , deleted ....) , 
       make:policy          // ** make a policy and gates "Gate is the same as Permission" ( classes that organize authorization logic around a particular model or resource )
-      make:provider
+      make:provider        //
       make:request         // ** For more complex *validation* scenarios, Form requests are custom request 
                                     classes that encapsulate their own validation and authorization logic
       make:resource        // ** make resource (get - post - put/patch - delete ) for routes or/and controller
-      make:rule
+      make:rule            //
       make:seeder          // ** stor the generaited data (by ex factory) in db 
-      make:test
+      make:test            //
 
 
 # php artisan :  
@@ -187,7 +188,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       -V            // laravel Version    ( also : composer -V , php -v )
       storage:link  // link the storage dir to public ( to access uploaded file ) look at : config/filesystem.php
       vendor:publish// when a package's users execute the vendor:publish command, his files will be copied to the specified location.
-      event:generate// generate an event and listner if not found based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
+      event:generate// generate an event and listner if not found , based of property  '$listen' array registred in 'App\Providers\EventServiceProvider' 
                        Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
       event:list    // list all events and ther listeners after registrated an genered
       notifications:table // create a database table to hold your notifications. generate a migration with the proper table built-in notification schema
@@ -227,13 +228,32 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                                          accessor is to change the value of data after retrived (get) it from db ( lowercase to upercase ... )
                                                          mutators is the opposit of accessor , that is change the value of data when it is stored (set) in db       
 
-    - authentication and authorization : authentication verifies the identity of a user or service before granting them access like gards (see app/http/kernel) in routes 
-                                         authorization  determines what they can do once they have access
+    - role concept is to Adding Role column (ex : is_admin) to table "ex : users table"
+    - authentication : verifies the identity of a user or service before granting them access like gards (see app/http/kernel) in routes 
+                                         Adding Custom Guards : 
+                                         You may define your own authentication guards using the extend method on the Auth facade. You should place your call to the extend method within a service 
+                                         provider. Since Laravel already ships with an AuthServiceProvider, we can place the code in that provider
+                                         after that you may reference the guard in the guards configuration of your auth.php configuration file (look at doc)
 
-        - authorization : laravel provides two primary ways of authorizing actions: gates and policies. Think of gates and policies like routes and controllers. 
+                       authorization  determines what they can do once they have access
+
+        - authorization : In Laravel, the authorization system is built on top of the concept of permissions. Laravel provides various mechanisms for implementing authorization
+            laravel provides two primary ways of authorizing actions: gates and policies . Think of gates and policies like routes and controllers. 
             Gates provide a simple, closure-based approach to authorization while policies, like controllers, group logic around a particular model or resource. 
             You do not need to choose between exclusively using gates or exclusively using policies when building an application. 
-            Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy ) .
+            Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy and gate ) .
+
+            Summary:
+
+                  users have roles
+                  roles have permissions
+                  app always checks for permissions (as much as possible), not roles
+                  views check permission-names
+                  policies check permission-names
+                  model policies check permission-names
+                  controller methods check permission-names
+                  middleware check permission names, or sometimes role-names
+                  routes check permission-names, or maybe role-names if you need to code that way.
 
     - mail fix ssl bug laravel 7 ! : 
                error : stream_socket_enable_crypto(): SSL operation failed with code 1. OpenSSL Error messages: error:1416F086:SSL 
@@ -246,3 +266,43 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                'allow_self_signed' => true);
 
 
+    - SOLID Principles php in laravel :
+
+               S : Single Responsibility principle 
+                   ex : controller can just call the clases that handle the logiqu like call validation request calss ......
+
+               O : Open/Closed principle 
+                   ex : packages in vendor : the code close for modification "dont change modify the source" , but open to add extensional code " extend clases " out of vendor source  
+
+               L : Liskov Substitution principle
+                   ex : use type hint , default values and return type in methodes to avoid the parametres confiused wen impliment it 
+                   public function calc(string $date , float $number = 0) : float
+                   {     ...      }         
+
+               I : Interface Segregation principle
+                   ex :  separate interfaces , to not get error or use a non methode 
+                         suposed we have a class "a" ampliments interface "b" who have two method 'get()' and 'set()' , we must separate thes methode on two interfaces , and then
+                         impliment the two of thes separated interfaces  clas a ampliments b,c { ... }
+
+               D : Dependency Inversion principle ( Note: Dependency Inversion is not equal to Dependency Injection ) .
+                   ex :  The Dependency Inversion Principle means depends on abstraction, not concretion. high-level modules should not depend on low-level modules. Both should depend on 
+                         abstraction never depend on anything concrete, only depend on abstraction.
+                         ( see ex : https://mohasin-dev.medium.com/how-to-use-dependency-inversion-principles-in-php-laravel-eada45fe7aec )   
+
+
+    - Observers are basically predefined events that happen only on Eloquent Models (creating a record, updating a record, deleting, etc). Events are generic, aren't predefined, 
+        and can be used anywhere, not just in models.
+        An observer watches for specific things that happen within eloquent such as saving, saved, deleting, deleted (there are more but you should get the point). 
+        Observers are specifically bound to a model.
+        observer usage : php artisan make:observer UserObserver --model=User  ( we relat it with the model on work)
+                         and we register it in App\Providers\EventServiceProvider at boot methode by adding  User::observe(UserObserver::class);
+
+      Events are actions that are driven by whatever the programmer wants. If you want to fire an event when somebody loads a page, you can do that. Unlike observers events can also be queue, 
+        and ran via laravel's cron heartbeat. Events are programmer defined effectively. They give you the ability to handle actions that you would not want a user to wait for (example being the
+        purchase of a pod cast)
+        * in this app we try to call the event on controller after create a form , in ohter way we can dispache the event in fom model to fire (declancher) the event at the form creat directly
+           protected $dispatchesEvents = [
+           'created' => FormAdd::class,
+            ];
+        * Instead of using custom event classes, you may register closures that execute when various model events are dispatched. Typically, you should register these closures in the 
+           booted method of your model   ( like as we do in contact model )    

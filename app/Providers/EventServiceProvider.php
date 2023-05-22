@@ -40,7 +40,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // built in laravel elequent event "created | updated | deleted ....."  ( send mail if a form created | or any logic )
+        // built in laravel elequent event (obervers) "created | updated | deleted ....."  ( send mail if a form created | or any logic )
         // we can ad multiple envent 
         // we can register events in appserviceprovider instead of evntserviceprovider
 
