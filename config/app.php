@@ -176,7 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,   // our service provide test / auto load all namecpace classes of services
+        App\Providers\HelperServiceProvider::class,   // our service provide helper test / autoload all namecpace classes of services
 
     ],
 

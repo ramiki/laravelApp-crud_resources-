@@ -214,6 +214,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
         'engine' => null,    to  'engine' => 'InnoDB',
          This saves you from adding $table->engine = "InnoDB"; for each of your Schemas
 
+    -  Re-using query constraints in Laravel Eloquent - Global vs. Local scopes ( ref https://www.amitmerchant.com/laravel-eloquent-global-local-scope )
+
     - In relationship we can change $users = User::all(); to $users = User::with('comments')->get();  to performe queries ( specified relationned table ('comment') before the call)
        ( instead of repeat queries it can resume it ) see ref : with() of models 
 
@@ -306,3 +308,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
             ];
         * Instead of using custom event classes, you may register closures that execute when various model events are dispatched. Typically, you should register these closures in the 
            booted method of your model   ( like as we do in contact model )    
+
+    - Customs Traits - Helpers - Services are typicly the some idea , in other way laravel hase built-in of each one of theme 
+      built-in of all of them is evry where in laravel , and in this app we tested custom and Trait and helper

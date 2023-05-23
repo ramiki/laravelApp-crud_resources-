@@ -1,7 +1,7 @@
 <?php
 
 
-// methode  2 : helper function registred in app.php autoload provider ( used in test controller )
+// methode  1 : helper function registred in composer.json autoload 'file' ( used in testcontroller and view.form_test.blade.php)
 
 if (!function_exists('example_helper')) {
     function example_helper($string)

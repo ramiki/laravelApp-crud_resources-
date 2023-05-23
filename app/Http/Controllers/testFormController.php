@@ -8,9 +8,7 @@ use Illuminate\Http\Request;
 use Symfony\Component\VarDumper\VarDumper;
 
 // use our helper for date format
-// use function App\Providers\format_date;
 use function App\Providers\format_date;
-
 
 // Test controller
 class testFormController extends Controller
@@ -29,7 +27,7 @@ class testFormController extends Controller
         // add a parametre who is a rando number
         $n = rand(1,100);
         
-        //get the current date
+        //get the current date (carbon instance)
         echo $date = now() ;
         echo "<br>";
 
@@ -39,8 +37,10 @@ class testFormController extends Controller
         echo "<h5>" . $user->first()->id  ."</h5>" ;
 
 
-        // get the current date with a helper function using a custom service provider
+        // test helper (get the current date) using a custom service provider ( see providers/helperserviceprovider.php)
+        // dont forget to use function App\Providers\format_date above ( this function path is regstered in config/app autoload service 'providers');
         echo format_date($date);
+
 
         // catche the parametre given from the route and pass it to view as new varivale ($foo) ,
         // the value of $t parametre is givin in route parametre form/{test}  by get methode 
@@ -58,7 +58,7 @@ class testFormController extends Controller
     // in this case Laravel will attempt to find the request instance matching in place of type hinting  
     public function form_p_test(request $re)
     {    
-        // test simple helper json autoload in (app.php) methode : 
+        // test simple helper (see test_helper.php) : 
        echo example_helper($re->input('username'));
 
         $n = 'random-num';

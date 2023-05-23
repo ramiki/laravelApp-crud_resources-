@@ -13,10 +13,12 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        // methode 1 : register a helper ( use in testcontroller )
+        // methode 2 : path registred in config/app.php autoload service 'provider' ( use in testcontroller )
            function format_date($date) {
-        return date('F j, Y', strtotime($date));
+            return date('F j, Y', strtotime($date));
     }
+
+
     }
 
     /**

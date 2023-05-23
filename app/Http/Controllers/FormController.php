@@ -19,15 +19,15 @@ use GuzzleHttp\Middleware;
 // add for mail
 use Illuminate\Support\Facades\Mail;
 use App\Mail\testmail;
-
+use App\Models\CustomNotification;
 // notificaitons
 use App\Notifications\CreatedForm;
 use Illuminate\Support\Facades\Notification;
 
-// use Auth;
 // use Illuminate\Support\Facades\Auth; // error in view use Auth instead
 use Auth;
-
+use Illuminate\Notifications\DatabaseNotification;
+use Illuminate\Notifications\Notification as NotificationsNotification;
 // DB facade
 use Illuminate\Support\Facades\DB;
 
@@ -144,7 +144,7 @@ class FormController extends Controller
         // $users is a collection, so calling notify method on a collection will lead to error. And the method notify only exist on user object instance
          //The Notifiable trait is included on your application's App\Models\User model by default
         //  foreach ($users as $user) {
-            // $user->notify(new CreatedForm($form->id,$user_creat));        }
+            // $user->notify(new CreatedForm($form->id,$user_creat));   }
 
 
         // if($form){
@@ -204,8 +204,13 @@ class FormController extends Controller
         // DB::table('notifications')->where('id' , $getNotifId)->update(['read_at' => now()]);
         //or the mini way
         // DB::table('notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->update(['read_at' => now()]);
-        // delete
-        DB::table('notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->delete();
+        // delete query builder
+        // DB::table('notifications')->where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->delete();
+        // eloquent : DatabaseNotification extends Laravel's base Notification model and provides additional functionality specific to database notifications.
+        // DatabaseNotification::where('data->form_id',$form->id)->where('notifiable_id' , Auth()->user()->id )->delete();
+
+        // cal local dynamique scope methode to delete the notification
+        CustomNotification::notification($form);
 
 
 
