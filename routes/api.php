@@ -23,12 +23,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::resource('forms', ApiController::class);
+
 
 
 
 Route::group([
-    'middleware' => 'api',
+    // use midelware guard api "jwt"  (see config/auth.php)
+    'middleware' => 'auth:api',
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
@@ -37,5 +38,5 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']); 
        
-    Route::get('/ok', function () { return "<h1>ok</h1>" ;});    
+    Route::resource('forms', ApiController::class);  
 });
