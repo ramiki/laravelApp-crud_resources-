@@ -1,12 +1,11 @@
 <?php
 
-
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 
 
-class ConsumControlle extends Controller
+class ConsumController extends Controller
 {
 
   public function get()
@@ -15,7 +14,7 @@ class ConsumControlle extends Controller
     // http clien allowing you to quickly make outgoing HTTP requests to communicate with other web applications (see docs)
     // laravel methode : facade http and guzzle option
 
-    $response =  Http::get('http://127.0.0.1/my/laravelApp-crud_resources-/public/api/forms/21');
+    $response =  Http::get('http://127.0.0.1:8080/my/laravelApp-crud_resources-/public/api/forms/');
     $jsonData = $response->json();
     return $jsonData;
 

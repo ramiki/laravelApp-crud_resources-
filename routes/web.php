@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\testFormController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ConsumControlle;
+use App\Http\Controllers\ConsumController;
 use App\Models\User;
 // Customizing Missing Model Behavior:
 use Illuminate\Http\Request;
@@ -103,6 +103,6 @@ Auth::routes();
 // home default raderect
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('auth' , 'verified')->name('home');
 
-// api conssomation routes
+// api consummation routes
 Route::get('cons', [ConsumController::class, 'get']);
 Route::get('post', [ConsumController::class, 'creat']);

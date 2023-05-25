@@ -231,7 +231,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                                          mutators is the opposit of accessor , that is change the value of data when it is stored (set) in db       
 
     - role concept is to Adding Role column (ex : is_admin) to table "ex : users table"
-    - authentication : verifies the identity of a user or service before granting them access like gards (see app/http/kernel) in routes 
+    - authentication : verifies the identity of a user or service before granting them access like guards (see app/http/kernel) in routes 
                                          Adding Custom Guards : 
                                          You may define your own authentication guards using the extend method on the Auth facade. You should place your call to the extend method within a service 
                                          provider. Since Laravel already ships with an AuthServiceProvider, we can place the code in that provider
@@ -311,3 +311,9 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
     - Customs Traits - Helpers - Services are typicly the some idea , in other way laravel hase built-in of each one of theme 
       built-in of all of them is evry where in laravel , and in this app we tested custom and Trait and helper
+
+
+
+    -  JWT api auth : ref : https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/    
+                      officiel JWT doc : https://jwt-auth.readthedocs.io/en/develop/
+                      app tools  : https://jwt.io/ 
