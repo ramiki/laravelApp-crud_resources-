@@ -230,23 +230,25 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                                                          accessor is to change the value of data after retrived (get) it from db ( lowercase to upercase ... )
                                                          mutators is the opposit of accessor , that is change the value of data when it is stored (set) in db       
 
-    - role concept is to Adding Role column (ex : is_admin) to table "ex : users table"
+    - role : concept is to Adding Role column (ex : is_admin) to table "ex : users table" after that we creat a middeleware 'admin' and cal it in route
+        or controller , the role methode separat the admin user from other users
+
     - authentication : verifies the identity of a user or service before granting them access like guards (see app/http/kernel) in routes 
                                          Adding Custom Guards : 
-                                         You may define your own authentication guards using the extend method on the Auth facade. You should place your call to the extend method within a service 
-                                         provider. Since Laravel already ships with an AuthServiceProvider, we can place the code in that provider
-                                         after that you may reference the guard in the guards configuration of your auth.php configuration file (look at doc)
+                                         You may define your own authentication guards using the extend method on the Auth facade. You should place your call 
+                                          to the extend method within a service provider. Since Laravel already ships with an AuthServiceProvider,
+                                          we can place the code in that provider after that you may reference the guard in the guards 
+                                          configuration of your auth.php configuration file (look at doc)
 
-                       authorization  determines what they can do once they have access
-
-        - authorization : In Laravel, the authorization system is built on top of the concept of permissions. Laravel provides various mechanisms for implementing authorization
+        - authorization : In Laravel, the authorization system is built on top of the concept of permissions. Laravel provides various 
+            mechanisms for implementing authorization , determines what they can do once they have access
             laravel provides two primary ways of authorizing actions: gates and policies . Think of gates and policies like routes and controllers. 
-            Gates provide a simple, closure-based approach to authorization while policies, like controllers, group logic around a particular model or resource. 
+            Gates provide a simple, closure-based approach to authorization ( we can use guat at view like adding @can ...)while policies, like controllers,
+            ,group logic around a particular model or resource. 
             You do not need to choose between exclusively using gates or exclusively using policies when building an application. 
             Most applications will most likely contain some mixture of gates and policies, and that is perfectly fine ( in this project we use policy and gate ) .
 
             Summary:
-
                   users have roles
                   roles have permissions
                   app always checks for permissions (as much as possible), not roles
@@ -317,3 +319,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     -  JWT api auth : ref : https://www.positronx.io/laravel-jwt-authentication-tutorial-user-login-signup-api/    
                       officiel JWT doc : https://jwt-auth.readthedocs.io/en/develop/
                       app tools  : https://jwt.io/ 
+
+        auth guard bug fixed : adding 'api' to all auth() mehode of authcontroller : auth('api')
