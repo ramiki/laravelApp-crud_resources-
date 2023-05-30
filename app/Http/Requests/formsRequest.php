@@ -28,7 +28,7 @@ class formsRequest extends FormRequest
             'email' => 'required',
             'age'   => 'bail|required',
             'note'  => 'required',
-            'image'  => 'required'
+            // 'image'  => 'required'
         ];
     }
 }

@@ -35,14 +35,14 @@ class CreatedForm extends Notification
      */
     public function via($notifiable)
     {
-
-        //Every notification class has a via method that determines on which
-        // channels the notification will be delivered. Notifications may be 
-        // sent on the mail "or and" database , broadcast, nexmo, and slack channels.
-        
-        // just add uncomment return mail and function toMail to send notification to email either
-        // in this exemple we used databese : 
-
+        /**
+         * Every notification class has a via method that determines on which
+         * channels the notification will be delivered. Notifications may be 
+         * sent on the mail "or and" database , broadcast, nexmo, and slack channels.
+         *
+         * just add mail or uncomment return mail and function toMail to send notification to email either
+         * in this exemple we used database : 
+        */
         // return ['mail' , 'database'];
         return ['database'];
     }
@@ -67,6 +67,7 @@ class CreatedForm extends Notification
      * @param  mixed  $notifiable
      * @return array
      */
+    
     // toarray and todatabase see the docs
     // send the notification data to db "data" field
     public function toarray($notifiable)

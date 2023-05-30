@@ -5,10 +5,8 @@ namespace App\Providers;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\testmail;
 use App\Models\Form;
-
 use App\Events\FormAdd;
 use App\Listeners\SendEmailaddingform;
-
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,7 +17,7 @@ class EventServiceProvider extends ServiceProvider
     /**
      * The event listener mappings for the application.
      * generate an event and listner if not found by " php artisan event:generate " cmd
-     *                 Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
+     * Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
      *
      * @var array
      */
@@ -45,7 +43,7 @@ class EventServiceProvider extends ServiceProvider
         // we can register events in appserviceprovider instead of evntserviceprovider
 
         // Form::created(function ($form) {
-        //     Mail::to($form->email)->send(new testmail($form));
+        //   Mail::to($form->email)->send(new testmail($form));
         // });
     }
 }

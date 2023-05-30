@@ -16,7 +16,7 @@ class AuthServiceProvider extends ServiceProvider
     protected $policies = [
         // 'App\Models\Model' => 'App\Policies\ModelPolicy',
         
-            //mapping form model with its policy
+        //mapping form model with its policy
         'App\Models\Form' => 'App\Policies\FormPolicy',
 
     ];
@@ -31,12 +31,14 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         // register a gate ( use in contactcontroller.php )
-    Gate::define('access-admin', function (User $user) {
+        Gate::define('access-admin', function (User $user) {
         return $user->is_admin ;  // if $user->is_admin == true
+
+        // new code wright php +7.4
+        // Gate::define('access-admin', fn(User $user) => $user->is_admin) ;
     });
 
-    // new code wright php +7.4
-    // Gate::define('access-admin', fn(User $user) => $user->is_admin) ;
+   
 
         //
     }

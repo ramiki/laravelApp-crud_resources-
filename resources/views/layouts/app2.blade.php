@@ -132,6 +132,7 @@
 <body>
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm py-4">
             <div class="container">
+                
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
@@ -211,8 +212,6 @@
                           <i class="bi bi-bell-fill"><span class="badge">{{ Auth::User()->unreadNotifications->count()}}</span></i>
                           
                         </a>
-
-                       
                         
                         <ul class="dropdown-menu dropdown-menu-right text-right notifications" role="menu" aria-labelledby="dLabel">
                           

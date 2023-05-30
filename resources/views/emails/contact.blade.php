@@ -1,3 +1,4 @@
+
 {{-- contact us email template with data  --}}
 
 <h2>Hey, It's me {{ $data->name }}</h2> 

@@ -19,7 +19,7 @@ class formPolicy
      */
 
     // authoriz all policys if condition (admin)
-    // restrinc the delete methode of other users for admin
+    // restrinc the update and delete methode of other users for admin
     public function before(User $user, $ability)
     {
 
@@ -37,7 +37,6 @@ class formPolicy
 
         // This code will allow admin users to perform the 'create' and 'view' actions,
         // but not the 'update' and 'delete' actions, which can be performed by all authenticated users.
-
         // The before method of a policy class will not be called if the class doesn't contain a method with a name matching the name of the ability being checked.
 
 

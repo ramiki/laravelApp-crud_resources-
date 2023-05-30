@@ -26,9 +26,11 @@ class Form extends Model
         'note' => 'int'
     ];
 
-    // adding $fillable property to model work as when creating or updating an instance of the "forms" model, the data can be passed in as an array, 
-    // and Laravel will automatically assign the values to the corresponding fields in the model. This is done using the "create" method (look at FormController at store() method )
-    // Mass assignment
+    /**
+    *  adding $fillable property to model work as when creating or updating an instance of the "forms" model, the data can be passed in as an array, 
+    *    and Laravel will automatically assign the values to the corresponding fields in the model. This is done using the "create" method (look at FormController at store() method )
+    *   Mass assignment
+    */
     protected $fillable = [
         'name',
         'email',
@@ -39,16 +41,18 @@ class Form extends Model
         'image'
     ];
 
-    // in the new version >5.. The SoftDeletes trait will automatically cast the deleted_at 
-    // attribute to a DateTime / Carbon instance for you , no need to add ligne bellow
-    // protected $dates = ['deleted_at'];
+    /** 
+    * in the new version laravel >5.. The SoftDeletes trait will automatically cast the deleted_at 
+    * attribute to a DateTime / Carbon instance for you , no need to add ligne bellow
+    * protected $dates = ['deleted_at'];
+    */
 
     // change the param routes id to name (ex : get users by name "also in url") 
     // public function getRouteKeyName()
     // {
     //     // generate url param by name ( ex in form.show )
     //     return 'name' ;  
-    //     //  return str_replace(' ', '-', 'name');  // didn't work
+    //     // return str_replace(' ', '-', 'name');  // didn't work
     // }
 
     // public function getRouteKey()

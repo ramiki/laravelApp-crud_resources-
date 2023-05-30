@@ -29,6 +29,5 @@ class LogRegisteredUser
     public function handle(Registered $event)
     {
             Mail::to('ramikii41@gmail.com')->send(new testmail($event->user));
-        
     }
 }

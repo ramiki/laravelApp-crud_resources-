@@ -15,9 +15,12 @@ class AuthController extends Controller
      *
      * @return void
      */
+
+    // use auth:api middleware for checking the token if exist (except logind and register pages )
     public function __construct() {
         $this->middleware('auth:api', ['except' => ['login', 'register']]);
     }
+
     /**
      * Get a JWT via given credentials.
      *

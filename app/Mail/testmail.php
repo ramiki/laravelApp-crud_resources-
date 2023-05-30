@@ -42,7 +42,7 @@ class testmail extends Mailable
      */
     public function build()
     {
-        return $this->from('email@configuredby.default' ,  'title : laravel mail test')
+        return $this->from('email@configuredby.default' ,  'title : mail test')
         ->subject('the subject ...')
         // the html mail from the view
         ->view('forms.mail');

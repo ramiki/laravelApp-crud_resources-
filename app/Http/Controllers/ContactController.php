@@ -20,14 +20,11 @@ class ContactController extends Controller
      */
     public function index()
     {
-        // use the gate ( authorize this page only if admin )
+       // use the gate ( authorize this page only if admin )
        if (!Gate::allows('access-admin')){
-        abort('401');
-    }
-
-
-
-        return view('contactForm');
+            abort('401');
+        }
+       return view('contactForm');
     }
   
     /**
@@ -47,12 +44,11 @@ class ContactController extends Controller
 
         Contact::create($request->all());
   
-// send email in controller insted of model event ( look at contact model )
+    // send email in controller insted of model event ( look at contact model )
     //    $m = Contact::create($request->all());
-    //     $adminEmail = "ramikii41@gmail.com";
-    //     Mail::to($adminEmail)->send(new ContactMail($m));
+    //    $adminEmail = "ramikii41@gmail.com";
+    //    Mail::to($adminEmail)->send(new ContactMail($m));
   
-        return redirect()->back()
-                         ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+        return redirect()->back()->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
     }
 }

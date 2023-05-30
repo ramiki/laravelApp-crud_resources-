@@ -9,7 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-// impliment mustverifuemail and use notifiable to avtive email verification on user model
+// implement mustverifuemail and use notifiable to active email verification on user model
 // class User extends Authenticatable implements MustVerifyEmail
 class User extends Authenticatable implements JWTSubject
 {
@@ -47,9 +47,7 @@ class User extends Authenticatable implements JWTSubject
 
     // hasMany relationship to retrive user by auth ( see formcontroller index)
     public function forms(){
-
         return $this->hasMany(Form::class);
-
     }
 
 

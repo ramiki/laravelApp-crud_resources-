@@ -25,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // // If the user only authenticated
         // if(auth()->check()){
-        //     // If the user only authenticated
-        //     echo auth()->user()->name;
-        //   }
+        //    echo auth()->user()->name;
+        // }
         return view('home');
     }
 }
