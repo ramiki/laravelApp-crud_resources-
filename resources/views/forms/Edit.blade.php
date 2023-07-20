@@ -4,10 +4,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Edit form</h2>
+                <h2>Edit profile : </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('forms.index') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
+                {{-- <a class="btn btn-primary" href="{{ route('forms.show', $form->id) }}" title="Go back"> <i class="fas fa-backward "></i> </a> --}}
+                <a class="btn btn-primary" href="{{ url('forms') }}" title="Go back"> <i class="fas fa-backward "></i> </a>
             </div>
         </div>
     </div>
@@ -23,7 +24,7 @@
         </div>
     @endif
 
-    <form action="{{ route('forms.update', $form->id) }}" method="POST">
+    <form action="{{ route('forms.update', $form->id) }}" method="POST" enctype="multipart/form-data">
 
         {{--  add a key in this post , the key generrated by private key of this laravel app (look at .env )  --}}
         @csrf
@@ -31,7 +32,19 @@
         {{-- add hint  --}}
         @method('PUT')
 
+        
         <div class="row">
+
+           {{-- update image --}}
+           <div class="col-xs-12 col-sm-12 col-md-12">
+               <div class="form-group ">
+                   <strong>image:</strong>
+                   <br>
+                   <img src="{{ asset('storage/'.$form->image)}}" class="card-img-top" alt="..." style="width: 5.35rem;">
+                   <input type="file" name="image" value="{{ $form->image }}" class="form-control" placeholder="image"  >
+               </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Name:</strong>
@@ -62,7 +75,7 @@
                 <div class="form-group">
                     <strong>note:</strong>
                     <input type="number" name="note" class="form-control" placeholder="{{ $form->note }}"
-                        value="{{ $form->age }}">
+                        value="{{ $form->note }}">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

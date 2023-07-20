@@ -25,11 +25,12 @@ class FormFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => $this->faker->numberBetween(1 , 5),
             'name' => $this->faker->name(),
             'email' => $this->faker->unique()->safeEmail(),
             'age' => $this->faker->numberBetween(18, 21),
             'note' => $this->faker->numberBetween(1, 20),
-            // 'remember_token' => Str::random(10),
+            'image' => $this->faker->randomElement(['image/image_b.jpg', 'image/image_g.jpg'])
         ];
     }
 }

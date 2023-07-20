@@ -9,13 +9,14 @@ class HomeController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
+     * methode 2 for Middleware euth ( the first is in route )
+     * 
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
     /**
      * Show the application dashboard.
@@ -24,10 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // // If the user only authenticated
         // if(auth()->check()){
-        //     // If the user only authenticated
-        //     echo auth()->user()->name;
-        //   }
+        //    echo auth()->user()->name;
+        // }
         return view('home');
     }
 }

@@ -74,6 +74,9 @@
   </fieldset>
 </form>
 
+{{-- exemple helper (see test_help.php) --}}
+{{ example_helper('helper test json autoload ')}}
+
   {{-- retrive data sended in a session with methode with()  (post methode)--}}
     {{-- {{ $re = session()->get('re') ; }}  --}}
 

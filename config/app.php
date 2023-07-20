@@ -80,7 +80,8 @@ return [
     |
     */
 
-    'locale' => 'en',
+    // change 'en' to 'fr' ex of resources/lang/fr , for test validation (fr files find in the net)
+    'locale' => 'fr',
 
     /*
     |--------------------------------------------------------------------------
@@ -175,7 +176,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\HelperServiceProvider::class,   // our service provide test / auto load all namecpace classes of services
+        // App\Providers\HelperServiceProvider::class,   // our service provide helper test / autoload all namecpace classes of services
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
 
     ],
 
@@ -230,7 +232,9 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'JWTAuth' => Tymon\JWTAuth\Facades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuth\Facades\JWTFactory::class,
+        
     ],
 
 ];
