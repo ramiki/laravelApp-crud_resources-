@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
+// hash
+use Illuminate\Support\Facades\Hash;
+
+// random str
+use Illuminate\Support\Str;
+
 // events 
 use Illuminate\Support\Facades\Event;
 use App\Events\formadd;
 // add aditionale request for validation
 use App\Http\Requests\formsRequest;
+use App\Jobs\AllAdminJob;
 use App\Models\Form;
 use Illuminate\Http\Request;
 use GuzzleHttp\Middleware;
-// use Illuminate\support\str;
 // add for mail
 use Illuminate\Support\Facades\Mail;
 use App\Mail\testmail;
@@ -25,6 +31,7 @@ use Illuminate\Notifications\Notification as NotificationsNotification;
 // DB facade
 use Illuminate\Support\Facades\DB;
 use App\Models\User;
+use Faker\Provider\Lorem;
 use Symfony\Component\VarDumper\VarDumper;
 
 class FormController extends Controller
@@ -278,12 +285,19 @@ class FormController extends Controller
         // send to all with data
         // $forms = Form::All();
 
-        $form = Form::where('email', 'ramikii41@gmail.com')->first();
-            Mail::to($form->email)->send(new testmail($form));
+        // $form = Form::where('email', 'ramikii41@gmail.com')->first();
+        //     Mail::to($form->email)->send(new testmail($form));
 
         // send to specified mail wihout data ( for test )
         // Mail::to(['ramikii41@gmail.com'])->send(new testmail());
 
+        // test queue job with data send from controller (make all user admin ) see AllAdminJob.php , 
+
+        $toadmin = User::pluck('id');
+        AllAdminJob::dispatch($toadmin)->delay(now()->second(100));  // add a delay befor executing the job
+
+      
+        
         return redirect()->route('forms.index')->with('success', 'email sent successfully');
     }
 }

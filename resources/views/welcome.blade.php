@@ -9,30 +9,40 @@
 <meta name="author" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<title>App Starter HTML CSS Website Template</title>
+<title>Stud'Us</title>
 <!--
 App Starter Template
 http://www.templatemo.com/tm-492-app-starter
 -->
 <link rel="stylesheet" href="css/css/bootstrap.min.css">
 <link rel="stylesheet" href="css/css/animate.css">
-<link rel="stylesheet" href="css/css/font-awesome.min.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{{-- <link rel="stylesheet" href="css/css/font-awesome.min.css"> --}}
+{{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> --}}
 
+{{-- <link rel="stylesheet" href="css/css/magnific-popup.css"> --}}
 
-<link rel="stylesheet" href="css/css/magnific-popup.css">
-
-<link rel="stylesheet" href="css/css/owl.theme.css">
+{{-- <link rel="stylesheet" href="css/css/owl.theme.css"> --}}
 <link rel="stylesheet" href="css/css/owl.carousel.css">
 
-<link href='https://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'>
-<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'>
+{{-- <link href='https://fonts.googleapis.com/css?family=Unica+One' rel='stylesheet' type='text/css'> --}}
+{{-- <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,700' rel='stylesheet' type='text/css'> --}}
 
 <!-- Main css -->
 <link rel="stylesheet" href="css/css/style.css">
 
 </head>
 <body data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+
+
+     {{-- css live edite --}}
+
+     {{-- <div class="style">
+     <style contenteditable style="display: block; white-space: pre;">
+          style {
+              background-color: rgb(250, 154, 154);
+          }
+      </style> --}}
+     {{-- </div> --}}
 
 
 <!-- PRE LOADER -->
@@ -42,25 +52,23 @@ http://www.templatemo.com/tm-492-app-starter
 </div>
 
 
-
 <!-- Navigation Section -->
 
 <div class="navbar navbar-default navbar-fixed-top">
 	<div class="container">
 
 		<div class="navbar-header">
-			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+			{{-- <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
 				<span class="icon icon-bar"></span>
-			</button>
+			</button> --}}
 			<a href="#" class="navbar-brand logo"><span>Stud</span>'Us</a>
 		</div>
       
 		<div class="collapse navbar-collapse">
 
                <ul class="nav navbar-nav navbar-right bg-info" style="margin-left: 140px;">
-
                @if (Route::has('login'))
                          {{-- In Laravel, the @auth directive is used to check if the user is authenticated or not ( opposite to guest --}}
                          @auth
@@ -72,13 +80,12 @@ http://www.templatemo.com/tm-492-app-starter
                               <li><a href="{{ route('register') }}" class="">Register</a></li>
                               @endif
                          @endauth
-                    
                @endif
-
                
                     {{-- <li><a href="#">Login</a></li>
                     <li><a href="#">Register</a></li> --}}
                </ul> 
+
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="#home" class="smoothScroll">Home</a></li>
 				<li><a href="#about" class="smoothScroll">About</a></li>

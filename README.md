@@ -84,7 +84,19 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Migration create to add column 'image' to forms table for upload image  :   php artisan make:migration add_column_image_forms --table=forms
 - Migration create to add column 'is_admin' to users table for admin authorization  :php artisan make:migration add_column_is_admin_users --table=users
 - Migration Configuration :\database\migrations\2021_08_30_185321_create_forms_table.php
-- Migration run all : php artisan migrate
+- Migration run all : php artisan migrate 
+    * for Syntax error or access violation: 1071 La clé est trop longue. Longueur maximale: 1000 : 
+        fix 1 : change 'engine' => 'null',   to 'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',   in config/databese.php
+        fix 2 : add this in at /app/Providers/AppServiceProvider.php and inside the boot method update the default string length: 
+                public function boot()
+                {
+                // Fix for MySQL < 5.7.7 and MariaDB < 10.2.2
+                 Schema::defaultStringLength(191); //Update defaultStringLength
+                }
+        fix 3 : Change Mariadb to mysql, that can also fix the issue !!
+
+     ** dont forget 'php artisn config:clear' after evry config change to reload the new config           
+
 
 - routes adding : routes\web.php ( + resource method )
 
@@ -147,7 +159,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
       make:cast             // ** converting attributes (retrived data from model) to common data types (string or int ...).
                                   almost the same of 'Accessors & Mutators' but for data converting
-      make:channel         //
+      make:channel         //******************************
       make:command         // create a new command class in the app/Console/Commands directory. (not used yet)
                               Make sure to register your custom command in the app/Console/Kernel.php file's commands array to make it available for execution
       make:component       // create a class based component, will place the component in the app/View/Components directory
@@ -161,7 +173,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                               exceptions in a structured way , To handle this custom exception, Laravel provides an ExceptionHandler class located at app/Exceptions/Handler.php
                               You can add custom exception handling logic to this class.
       make:factory         // ** generate data (faker)
-      make:job             // ** 
+      make:job             // ** By default, all of the queueable jobs for your application are stored in the app/Jobs directory. If the app/Jobs directory doesn't exist, it will be created
+                                The generated class will implement the Illuminate\Contracts\Queue\ShouldQueue interface, indicating to Laravel that the job should be pushed onto the queue to run asynchronously.
       make:mail            // ** create a "Email" file in app/mail/testmail.php for mail class "build" to define view and subject ...
                                  Markdown mailable messages allow you to take advantage of the pre-built templates and components ( blade ) of mail notifications in your mailables
                                  sender location : app/mail/contactMail.php & template location : view/mails/contat.blade.php
@@ -172,12 +185,12 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
       make:observer        // ** creat observers, If you are listening for many events on a given model, you may use observers to group all of your listeners into a single
                                  class. Observer classes have method names which reflect the Eloquent events you wish to listen for ( created , updated , deleted ....) , 
       make:policy          // ** make a policy and gates "Gate is the same as Permission" ( classes that organize authorization logic around a particular model or resource )
-      make:provider        // **
+      make:provider        // ** *************************************
       make:request         // ** For more complex *validation* scenarios, Form requests are custom request classes that encapsulate their own validation and authorization logic
       make:resource        // ** make resource (get - post - put/patch - delete ) for routes or/and controller
-      make:rule            //
+      make:rule            //****************************************
       make:seeder          // ** stor the generaited data (by ex factory) in db 
-      make:test            //
+      make:test            //*****************************************
 
 
 # php artisan :  
@@ -200,6 +213,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
                        Alternatively, you may use the make:event and make:listener Artisan commands to generate individual events and listeners
       event:list    // list all events and ther listeners after registrated an genered
       notifications:table // create a database table to hold your notifications. generate a migration with the proper table built-in notification schema
+      queue:table   // In order to use the database queue driver, you will need a database table to hold the jobs. To generate a migration that creates this table, .
+                       Once the migration has been created, you may migrate your database using the migrate command
 
 # notes  :  ( DRY : Dont Repeat Yourself )
     
@@ -294,8 +309,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
                I : Interface Segregation principle
                    ex :  separate interfaces , to not get error or use a non methode 
-                         suposed we have a class "a" ampliments interface "b" who have two method 'get()' and 'set()' , we must separate thes methode on two interfaces , and then
-                         impliment the two of thes separated interfaces  clas a ampliments b,c { ... }
+                         supposed we have a class "a" implements interface "b" who have two method 'get()' and 'set()' , we must separate thes methode on two interfaces , and then
+                         implement the two of these separated interfaces  class a implement b,c { ... }
 
                D : Dependency Inversion principle ( Note: Dependency Inversion is not equal to Dependency Injection ) .
                    ex :  The Dependency Inversion Principle means depends on abstraction, not concretion. high-level modules should not depend on low-level modules. Both should depend on 
@@ -306,28 +321,40 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
     - Observers are basically predefined events that happen only on Eloquent Models (creating a record, updating a record, deleting, etc). 
         An observer watches for specific things that happen within eloquent such as saving, saved, deleting, deleted (there are more but you should get the point). 
         Observers are specifically bound to a model.
-        observer usage : php artisan make:observer UserObserver --model=User  ( we relat it with the model on work)
+        observer usage : php artisan make:observer UserObserver --model=User  ( we relai it with the model on work)
                          and we register it in App\Providers\EventServiceProvider at boot methode by adding  User::observe(UserObserver::class);
         Events are generic, aren't predefined, and can be used anywhere, not just in models.
 
       Events are actions that are driven by whatever the programmer wants. If you want to fire an event when somebody loads a page, you can do that. Unlike observers events can also be queue, 
         and ran via laravel's cron heartbeat. Events are programmer defined effectively. They give you the ability to handle actions that you would not want a user to wait for (example being the
         purchase of a pod cast)
-        * in this app we try to call the event on controller after create a form , in ohter way we can dispache the event in form model to fire (declancher) the event at the form creat directly
+        * in this app we try to call the event on controller after create a form , in other way we can dispatche the event in form model to fire (déclencher) the event at the form creat directly
            protected $dispatchesEvents = [
            'created' => FormAdd::class,
             ];
         * Instead of using custom event classes, you may register closures that execute when various model events are dispatched. Typically, you should register these closures in the 
            booted method of your model   ( like as we do in contact model )    
 
-    - Customs Traits - Helpers - Services are typicly the some idea , in other way laravel hase built-in of each one of theme 
-      built-in of all of them is evry where in laravel , and in this app we tested custom Trait and helper
+    - Customs Traits - Helpers - Services are typically the some idea , in other way laravel hase built-in of each one of theme 
+      built-in of all of them is every where in laravel , and in this app we tested custom Trait and helper
 
     - postman : give a features documentation ( docs our api ) import/export or publish enligne docs (ex : exchange docs links between front and back-end devs ) 
 
+    -  queueable jobs : 
+        * config : to creat a queuable jobs we need to change the queue connection=sync ( the default ) queue paramètre .env to the driver we want use (database in this ex)
+          by default the queue driver is (sync) in the queue_connection at .env file that give accesse to the queue.php config file to spicifie the driver tha we want use ( databas - redis ...), the sync is that the queue job is running automatically (like wih out queueing)
 
+        * creat job table : his role is to queued the jobs , that mean put jobs in the table one after one (queue) 
+                            to use daabase driver we must creat a job table with "php artisan queue:table" dont forget to migrate after
+                            a "failed_job" table is auto includ in laravel for list the failed jobs  
 
+        * creat job file : php artisan make:job UserJob , in that file we put the job "our code" we want to execute in handel methode . 
+                           after that we "dipatch" it ( dispatche mean call , execute it ) in the controller  " AllAdminJob::dispatch(); "
 
+        * run the worker : Laravel includes an Artisan command that will start a queue worker and process new jobs as they are pushed onto the queue.
+                           to run the worker : php artisan queue:work . To keep the queue:work process running permanently in the background, you should use a process monitor such as systemd or Supervisor to ensure that the queue worker does not stop running.
 
-
+        * cors :            config\cors.php : configure  settings for cross-origin resource sharing
+                            or "CORS". This determines what cross-origin operations may execute
+                            in web browsers. ( mos us in secure sharing data between apis and front )
     

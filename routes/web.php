@@ -46,7 +46,7 @@ Route::post('contact-us', [ContactController::class, 'store'])->name('contact.us
 // middleware for authentification ( add 'verified' for email verification )
 Route::resource('forms', FormController::class)->middleware('auth')
 
-    // change param name of resouces : 
+    // change param name of resources : 
     // ->parameters(['forms' => 'something'])
 
     // Customizing Missing Model Behavior , redirect if resources methode name was not matched ( ../forms/foo ) :
